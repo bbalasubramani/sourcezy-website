@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Company | Sourcezy — Magicard Solutions Reseller</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F0F4FA;
+      --white:   #ffffff;
+      --navy:    #0A2A6E;
+      --blue:    #2B7BE5;
+      --ink:     #0A1628;
+      --muted:   #5A6A82;
+      --hint:    #8A9BB5;
+      --border:  #D8E2F0;
+      --surface: #E8EEF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(240,244,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      gap: 24px;
+    }
+    .nav-logo { height: 36px; display: block; }
+    .nav-links { list-style: none; display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); font-weight: 500; }
+    .nav-cta {
+      text-decoration: none;
+      background: var(--navy);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue); }
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 22px;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: radial-gradient(circle at 50% 50%, #ffffff 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      text-align: center;
+      min-height: calc(100vh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .page-tag {
+      display: inline-block;
+      border: 1px solid rgba(43,123,229,0.4);
+      color: var(--blue);
+      background: rgba(43,123,229,0.06);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 80px 48px; }
+    .section-white { background: var(--white); }
+    .section-bg { background: var(--bg); }
+    .inner { max-width: 1160px; margin: 0 auto; }
+
+    /* ── SECTION DIVIDER ── */
+    .sec-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .div-line { flex: 1; height: 1px; background: var(--border); }
+    .div-text {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hint);
+      white-space: nowrap;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-cell {
+      padding: 40px 28px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--blue);
+      display: block;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hint);
+    }
+
+    /* ── PARTNERSHIP SECTION ── */
+    .partnership-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .partnership-copy h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .partnership-copy h2 em { font-style: italic; color: var(--blue); }
+    .partnership-copy p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 15px;
+      font-weight: 300;
+    }
+    .badge-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+    }
+    .badge-blue {
+      background: rgba(43,123,229,0.08);
+      border-color: rgba(43,123,229,0.3);
+      color: var(--blue);
+    }
+    .partnership-visual {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(10,42,110,0.03);
+    }
+    .partnership-visual img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── VALUES ── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .value-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .value-card:hover {
+      border-color: rgba(43,123,229,0.35);
+      transform: translateY(-2px);
+    }
+    .value-card.navy-card {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .value-icon {
+      font-size: 28px;
+      color: var(--blue);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .value-icon-lt {
+      font-size: 28px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .ctag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hint);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .ctag-lt {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .ctitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .ctitle-lt {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .cbody {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .cbody-lt {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── TEAM SECTION ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .team-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .team-card:hover {
+      border-color: rgba(43,123,229,0.35);
+      transform: translateY(-2px);
+    }
+    .team-photo {
+      background: var(--surface);
+      border-bottom: 1px dashed #B0C4E0;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hint);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .team-info { padding: 22px 28px; }
+    .team-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .team-role {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    /* ── AWARDS ── */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .award-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .award-card:hover {
+      border-color: rgba(43,123,229,0.35);
+      transform: translateY(-2px);
+    }
+    .award-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(43,123,229,0.08);
+      border: 1px solid rgba(43,123,229,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    .award-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .award-body p {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* ── SECTION HEADING ── */
+    .sec-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .sec-heading em { font-style: italic; color: var(--blue); }
+    .sec-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    /* ── COVERAGE MAP STRIP ── */
+    .coverage-strip {
+      background: var(--navy);
+      border-radius: 14px;
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .coverage-copy { flex: 1; }
+    .coverage-copy h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .coverage-copy p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+    }
+    .coverage-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .coverage-tag {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--navy);
+      padding: 80px 48px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .cta-band h2 em { font-style: italic; color: rgba(255,255,255,0.65); }
+    .cta-band p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+    .cta-band-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 30px;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline-white {
+      display: inline-block;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.25);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 14px 30px;
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 56px 48px 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand-logo { height: 28px; margin-bottom: 14px; filter: brightness(0) invert(1); display: block; }
+    .footer-tagline { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 20px; }
+    .footer-contact-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55);
+      text-decoration: none; margin-bottom: 8px;
+      transition: color 0.18s;
+    }
+    .footer-contact-item:hover { color: #fff; }
+    .footer-contact-item i { font-size: 15px; color: rgba(255,255,255,0.3); }
+    .footer-col-head {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55);
+      text-decoration: none; transition: color 0.18s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 24px;
+      font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.3);
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-partner-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 5px 12px; border-radius: 20px;
+    }
+
+    /* ── IMG PLACEHOLDER ── */
+    .img-placeholder {
+      background: var(--surface);
+      border: 1px dashed #B0C4E0;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      color: var(--hint);
+      font-size: 13px;
+    }
+
+    /* ensure team photo images fit inside the photo box */
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* single-card layout: center the card and let the image fully cover the photo box */
+    .team-grid.single {
+      display: flex;
+      justify-content: center;
+    }
+    .team-grid.single .team-card {
+      max-width: 420px;
+      width: 100%;
+    }
+    .team-grid.single .team-photo {
+      padding: 0;
+      height: 220px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-mobile-toggle { display: block; }
+
+      .page-hero { padding: 0; }
+      .page-title { font-size: 36px; }
+
+      .section { padding: 48px 20px; }
+
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-cell:nth-child(odd) { border-right: 1px solid var(--border); }
+      .stat-cell:last-child { border-bottom: none; }
+
+      .partnership-grid { grid-template-columns: 1fr; gap: 32px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .awards-grid { grid-template-columns: 1fr; }
+
+      .coverage-strip { flex-direction: column; gap: 24px; padding: 32px 24px; }
+
+      .cta-band { padding: 56px 20px; }
+      .cta-band h2 { font-size: 28px; }
+
+      footer { padding: 40px 20px 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+      .sec-heading { font-size: 26px; }
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(240,244,250,0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      padding: 24px 28px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .mobile-menu nav { display: flex; flex-direction: column; gap: 28px; }
+    .mobile-menu nav a {
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    .mobile-menu nav a.active { color: var(--blue); }
+    .mobile-menu-cta {
+      margin-top: 40px;
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 30px;
+      border-radius: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html"><img src="sourcezy.png" class="nav-logo" alt="Sourcezy"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="system_showcase.html">Hardware</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="company.html" class="active">Company</a></li>
+      <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Consult Expert →</a>
+    <button class="nav-mobile-toggle" aria-label="Open menu" onclick="document.getElementById('mobileMenu').classList.add('open')">
+      <i class="ti ti-menu-2" aria-hidden="true"></i>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-menu-header">
+      <img src="sourcezy.png" alt="Sourcezy" style="height:32px;">
+      <button class="mobile-menu-close" aria-label="Close menu" onclick="document.getElementById('mobileMenu').classList.remove('open')">
+        <i class="ti ti-x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="system_showcase.html">Hardware</a>
+      <a href="support.html">Support</a>
+      <a href="company.html" class="active">Company</a>
+      <a href="bulk_inquiry.html">Bulk Inquiry</a>
+    </nav>
+    <a href="contact.html" class="mobile-menu-cta">Consult Expert →</a>
+  </div>
+
+  <!-- ── PAGE HERO ── -->
+  <section class="page-hero">
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 64px 24px;">
+      <div class="page-tag">Our Story</div>
+      <h1 class="page-title">Elevating <em>Identity</em> Security</h1>
+      <p class="page-sub">Sourcezy is India's Magicard Solutions Reseller — bringing precision card issuance hardware to enterprises, institutions, and government bodies across South India.</p>
+    </div>
+
+    <!-- ── STATS STRIP ── -->
+    <div class="stats-strip" role="region" aria-label="Company statistics" style="width: 100%;">
+    <div class="stat-cell">
+      <span class="stat-num">10+</span>
+      <span class="stat-label">Years in Operation</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">ID Systems Deployed</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">40+</span>
+      <span class="stat-label">Enterprise Clients</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">South India</span>
+      <span class="stat-label">Delivery & Support</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTNERSHIP STORY ── -->
+  <section id="partnership" class="section section-white" aria-labelledby="partnership-heading">
+    <div class="inner">
+      <div class="sec-divider">
+        <div class="div-line"></div>
+        <span class="div-text">Solutions Reseller</span>
+        <div class="div-line"></div>
+      </div>
+      <div class="partnership-grid">
+        <div class="partnership-copy">
+          <h2 id="partnership-heading">Securing Your Trust, <em>Empowering</em> Your Identity</h2>
+          <p>At Sourcezy, we build long-term relationships with our clients by providing access to Magicard’s premium secure credential technologies. As a Magicard Solutions Reseller, we don't just supply card printers; we align closely with your organization's vision to craft custom identity solutions that stand the test of time.</p>
+          <p>We guarantee that every system we implement is authentic, factory-warranted, and fully integrated with official technical resources. From healthcare systems and government bodies to financial institutions and schools, our clients trust us to deliver a robust and reliable security ecosystem.</p>
+          <p>We believe in end-to-end collaboration. Our expert team coordinates with yours through every phase of the project lifecycle—from initial consult and installation to bespoke configurations and ongoing support—ensuring seamless operation every day.</p>
+          <div class="badge-strip">
+            <span class="badge badge-blue">Magicard Solutions Reseller</span>
+            <span class="badge">Factory Warranted</span>
+            <span class="badge">South India Support</span>
+          </div>
+        </div>
+        <div>
+          <div class="partnership-visual">
+            <img src="images/company/handshake.png" alt="Client and staff handshake representing mutual trust and secure identity support">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VALUES ── -->
+  <section class="section section-bg" aria-labelledby="values-heading">
+    <div class="inner">
+      <div class="sec-divider">
+        <div class="div-line"></div>
+        <span class="div-text">Our Pillars</span>
+        <div class="div-line"></div>
+      </div>
+      <h2 class="sec-heading" id="values-heading">Three Pillars of <em>Our Practice</em></h2>
+      <p class="sec-sub">Every engagement we take on is built on the same foundational commitments — to precision, to trust, and to long-term partnership.</p>
+      <div class="values-grid">
+        <div class="value-card">
+          <i class="ti ti-shield-check value-icon" aria-hidden="true"></i>
+          <span class="ctag">Pillar One</span>
+          <div class="ctitle">Genuine Hardware, Zero Compromise</div>
+          <p class="cbody">Every Magicard printer and consumable we supply is sourced through official channels. No grey-market stock, no uncertified units — only factory-original systems with full warranty coverage.</p>
+        </div>
+        <div class="value-card navy-card">
+          <i class="ti ti-headset value-icon-lt" aria-hidden="true"></i>
+          <span class="ctag-lt">Pillar Two</span>
+          <div class="ctitle-lt">Lifecycle Support</div>
+          <p class="cbody-lt">Our relationship with a client does not end at delivery. We provide driver installation, configuration, staff training, ribbon replenishment, and ongoing technical support — managing your card issuance system for years.</p>
+        </div>
+        <div class="value-card">
+          <i class="ti ti-india value-icon" aria-hidden="true"></i>
+          <span class="ctag">Pillar Three</span>
+          <div class="ctitle">South India Reach</div>
+          <p class="cbody">Based in Bengaluru, we serve enterprise clients across South India. Our logistics network ensures fast delivery of printers, ribbons, and consumables to any location, with remote and on-site support available across South India.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEAM ── -->
+  <section class="section section-white" aria-labelledby="team-heading">
+    <div class="inner">
+      <div class="sec-divider">
+        <div class="div-line"></div>
+        <span class="div-text">Leadership</span>
+        <div class="div-line"></div>
+      </div>
+      <h2 class="sec-heading" id="team-heading">The People <em>Behind</em> Sourcezy</h2>
+      <p class="sec-sub">Our team brings together deep expertise in hardware sales, identity security, and enterprise technology support.</p>
+      <div class="team-grid single">
+        <!-- Partners card: single card representing both partners -->
+        <div class="team-card">
+          <div class="team-photo">
+            <a href="images/company/team.png" target="_blank" rel="noopener">
+              <img src="images/company/team.png" alt="Sourcezy partners" style="max-width:100%; max-height:100%; object-fit:cover; display:block;">
+            </a>
+          </div>
+          <div class="team-info">
+            <div class="team-name">Sourcezy Partners</div>
+            <div class="team-role">Our Team</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COVERAGE ── -->
+  <section class="section section-white">
+    <div class="inner">
+      <div class="sec-divider">
+        <div class="div-line"></div>
+        <span class="div-text">Geographic Reach</span>
+        <div class="div-line"></div>
+      </div>
+      <div class="coverage-strip" role="region" aria-label="Coverage areas">
+        <div class="coverage-copy">
+          <h3>South India Delivery & Support</h3>
+          <p>Headquartered in Bengaluru, we provide on-site commissioning and support in South India. Beyond that, we offer remote configuration, driver setup, and delivery services across South India.</p>
+        </div>
+        <div class="coverage-tags">
+          <span class="coverage-tag">Karnataka</span>
+          <span class="coverage-tag">Tamil Nadu</span>
+          <span class="coverage-tag">Telangana</span>
+          <span class="coverage-tag">Maharashtra</span>
+          <span class="coverage-tag">Gujarat</span>
+          <span class="coverage-tag">Delhi NCR</span>
+          <span class="coverage-tag">West Bengal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA BAND ── -->
+  <section class="cta-band" aria-labelledby="cta-heading">
+    <h2 id="cta-heading">Ready to Secure Your <em>Identity Infrastructure?</em></h2>
+    <p>Speak with a Sourcezy specialist — we'll recommend the right system for your organisation's scale and security requirements.</p>
+    <div class="cta-band-row">
+      <a href="contact.html" class="btn-white">Consult an Expert →</a>
+      <a href="bulk_inquiry.html" class="btn-outline-white">Bulk Inquiry</a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <img src="sourcezy.png" alt="Sourcezy" class="footer-brand-logo">
+        <p class="footer-tagline">Magicard Solutions Reseller in India — supplying card printers, ribbons, and consumables to banks, hospitals, schools, and government offices across South India.</p>
+        <a href="tel:+919886554160" class="footer-contact-item"><i class="ti ti-phone" aria-hidden="true"></i> +91 98865 54160</a>
+        <a href="tel:+919964301093" class="footer-contact-item"><i class="ti ti-phone" aria-hidden="true"></i> +91 99643 01093</a>
+        <a href="mailto:sales@sourcezy.in" class="footer-contact-item"><i class="ti ti-mail" aria-hidden="true"></i> sales@sourcezy.in</a>
+        <span class="footer-contact-item"><i class="ti ti-map-pin" aria-hidden="true"></i> Bengaluru, Karnataka, India</span>
+        <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left;">
+          <img src="images/google-review-qr.png" alt="Google Review QR Code" style="width: 50px; height: 50px; background: #fff; padding: 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
+          <div>
+            <span style="display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">Google Maps</span>
+            <a href="https://q.me-qr.com/6zvjel56" target="_blank" rel="noopener" style="font-size: 13px; color: #2B7BE5; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin: 0;">Write a review <i class="ti ti-external-link" aria-hidden="true" style="font-size: 11px;"></i></a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-head">Solutions</div>
+        <ul class="footer-links">
+          <li><a href="solutions.html">All Hardware</a></li>
+          <li><a href="system_showcase.html#magicard600">600 NEO</a></li>
+          <li><a href="system_showcase.html#magicard300">300 NEO</a></li>
+          <li><a href="system_showcase.html#magicardEplus">E+ NEO</a></li>
+          <li><a href="system_showcase.html#prima8">Prima 8</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Company</div>
+        <ul class="footer-links">
+          <li><a href="company.html">About Us</a></li>
+          <li><a href="company.html#partnership">Our Story</a></li>
+          <li><a href="support.html">Support Hub</a></li>
+          <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Contact</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Get in Touch</a></li>
+          <li><a href="mailto:sales@sourcezy.in">Email Us</a></li>
+          <li><a href="tel:+919886554160">Call Us</a></li>
+          <li><a href="support.html">Driver Downloads</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sourcezy. All rights reserved.</span>
+      <span class="footer-partner-badge"><i class="ti ti-rosette" aria-hidden="true"></i> Magicard Solutions Reseller · India</span>
+    </div>
+  </footer>
+  <script>
+    // Redirect mailto links directly to Gmail
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (link && link.href && link.href.startsWith('mailto:')) {
+        e.preventDefault();
+        const mailtoHref = link.href.substring(7);
+        const parts = mailtoHref.split('?');
+        const to = decodeURIComponent(parts[0]);
+        let subject = '';
+        let body = '';
+        if (parts[1]) {
+          const params = new URLSearchParams(parts[1]);
+          subject = params.get('subject') || '';
+          body = params.get('body') || '';
+        }
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(gmailUrl, '_blank');
+      }
+    });
+  </script>
+</body>
+</html>

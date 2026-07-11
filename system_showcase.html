@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hardware Systems — Sourcezy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F0F4FA;
+      --white:   #ffffff;
+      --navy:    #0A2A6E;
+      --blue:    #2B7BE5;
+      --ink:     #0A1628;
+      --muted:   #5A6A82;
+      --hint:    #8A9BB5;
+      --border:  #D8E2F0;
+      --surface: #E8EEF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; gap: 32px;
+      height: 64px; padding: 0 48px;
+      background: rgba(240,244,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { height: 32px; display: block; }
+    .nav-links { display: flex; gap: 28px; list-style: none; flex: 1; justify-content: center; }
+    .nav-links a {
+      text-decoration: none; font-size: 14px; font-weight: 400;
+      color: var(--muted); transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); font-weight: 500; }
+    .nav-cta {
+      text-decoration: none; font-size: 13px; font-weight: 500;
+      background: var(--navy); color: #fff;
+      padding: 9px 20px; border-radius: 4px;
+      white-space: nowrap; transition: opacity 0.18s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+    .nav-mobile-toggle {
+      display: none; background: none; border: none;
+      font-size: 22px; color: var(--ink); cursor: pointer; margin-left: auto;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: radial-gradient(circle at 50% 50%, #ffffff 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 48px 96px;
+      text-align: center;
+      min-height: calc(100vh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--hint);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .scroll-indicator:hover {
+      color: var(--blue);
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -6px); }
+      60% { transform: translate(-50%, -3px); }
+    }
+    .page-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid rgba(43,123,229,0.4);
+      background: rgba(43,123,229,0.06);
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px; font-weight: 400;
+      color: var(--ink); line-height: 1.12;
+      margin-bottom: 18px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-sub {
+      font-size: 16px; font-weight: 300; color: var(--muted);
+      max-width: 560px; margin: 0 auto 28px;
+    }
+
+    /* jump nav pills */
+    .jump-nav {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .jump-pill {
+      text-decoration: none;
+      font-size: 12px; font-weight: 500;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: var(--white);
+      padding: 7px 16px; border-radius: 20px;
+      transition: all 0.18s;
+    }
+    .jump-pill:hover { border-color: rgba(43,123,229,0.4); color: var(--blue); background: rgba(43,123,229,0.04); }
+
+    /* ── SECTION DIVIDER ── */
+    .sec-divider {
+      display: flex; align-items: center; gap: 16px;
+      padding: 0 48px; margin: 56px 0 40px;
+    }
+    .div-line { flex: 1; height: 1px; background: var(--border); }
+    .div-text {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--hint); white-space: nowrap;
+    }
+
+    /* ── MACHINE SECTION ── */
+    .machine-section {
+      padding: 0 48px 80px;
+      scroll-margin-top: 80px;
+    }
+
+    .machine-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .machine-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+    }
+
+    .machine-visual {
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 40px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .machine-visual img {
+      width: 100%; max-width: 320px;
+      object-fit: contain;
+    }
+    .img-placeholder {
+      background: var(--surface);
+      border: 1px dashed #B0C4E0;
+      border-radius: 8px;
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--hint);
+      font-size: 13px;
+      width: 100%;
+    }
+    .machine-tier-badge {
+      position: absolute; top: 20px; left: 20px;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+    }
+    .tier-pro { background: rgba(43,123,229,0.1); color: var(--blue); border: 1px solid rgba(43,123,229,0.25); }
+    .tier-corp { background: rgba(10,42,110,0.08); color: var(--navy); border: 1px solid rgba(10,42,110,0.2); }
+    .tier-entry { background: rgba(90,106,130,0.1); color: var(--muted); border: 1px solid rgba(90,106,130,0.2); }
+    .tier-industrial { background: #0A1628; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.1); }
+
+    .machine-info {
+      padding: 40px 40px 36px;
+    }
+    .machine-eyebrow {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--hint); margin-bottom: 10px;
+    }
+    .machine-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 400; color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .machine-tagline {
+      font-size: 15px; font-weight: 300; color: var(--muted);
+      margin-bottom: 28px; line-height: 1.6;
+    }
+
+    /* spec grid */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .spec-cell {
+      background: var(--white);
+      padding: 14px 18px;
+    }
+    .spec-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--hint); margin-bottom: 4px;
+    }
+    .spec-value {
+      font-size: 14px; font-weight: 400; color: var(--ink);
+    }
+
+    /* feature chips */
+    .feature-chips {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px;
+    }
+    .fchip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 400; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 6px;
+    }
+    .fchip i { font-size: 13px; color: var(--blue); }
+
+    /* machine actions */
+    .machine-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--navy); color: #fff;
+      font-size: 13px; font-weight: 500;
+      padding: 12px 24px; border-radius: 4px;
+      text-decoration: none; transition: opacity 0.18s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--navy);
+      font-size: 13px; font-weight: 500;
+      padding: 12px 24px; border-radius: 4px;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: all 0.18s; cursor: pointer;
+    }
+    .btn-outline:hover { border-color: rgba(43,123,229,0.4); color: var(--blue); }
+
+    /* connectivity + security strip below the fold */
+    .machine-detail-strip {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .detail-panel {
+      padding: 24px 40px;
+    }
+    .detail-panel + .detail-panel {
+      border-left: 1px solid var(--border);
+    }
+    .detail-heading {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--hint); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .detail-heading i { font-size: 14px; color: var(--blue); }
+    .detail-list {
+      list-style: none; display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .detail-list li {
+      font-size: 13px; font-weight: 300; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 6px;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .comparison-section {
+      padding: 0 48px 80px;
+    }
+    .comparison-wrap {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .comparison-table thead tr {
+      background: var(--navy);
+    }
+    .comparison-table thead th {
+      padding: 18px 24px;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 400;
+      color: #fff; text-align: left;
+    }
+    .comparison-table thead th:first-child {
+      color: rgba(255,255,255,0.55);
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .comparison-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.14s;
+    }
+    .comparison-table tbody tr:last-child { border-bottom: none; }
+    .comparison-table tbody tr:hover { background: rgba(43,123,229,0.03); }
+    .comparison-table tbody tr.table-section-header td {
+      background: var(--surface);
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--hint); padding: 10px 24px;
+    }
+    .comparison-table td {
+      padding: 15px 24px;
+      font-size: 14px; font-weight: 300; color: var(--muted);
+      vertical-align: top;
+    }
+    .comparison-table td:first-child {
+      font-size: 13px; font-weight: 400; color: var(--ink);
+    }
+    .check { color: var(--blue); font-size: 16px; }
+    .cross { color: var(--hint); font-size: 16px; }
+    .best-badge {
+      display: inline-block;
+      font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--blue); background: rgba(43,123,229,0.08); border: 1px solid rgba(43,123,229,0.2);
+      padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--navy);
+      padding: 64px 48px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 400;
+      color: #fff; margin-bottom: 12px;
+    }
+    .cta-band p {
+      font-size: 15px; font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 28px;
+    }
+    .cta-band-row {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #fff; color: var(--navy);
+      font-size: 13px; font-weight: 500;
+      padding: 12px 28px; border-radius: 4px;
+      text-decoration: none; transition: opacity 0.18s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline-white {
+      display: inline-block;
+      background: transparent; color: rgba(255,255,255,0.8);
+      font-size: 13px; font-weight: 500;
+      padding: 12px 28px; border-radius: 4px;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
+      transition: all 0.18s;
+    }
+    .btn-outline-white:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 56px 48px 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand-logo { height: 28px; margin-bottom: 14px; filter: brightness(0) invert(1); }
+    .footer-tagline { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 20px; }
+    .footer-contact-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55);
+      text-decoration: none; margin-bottom: 8px;
+      transition: color 0.18s;
+    }
+    .footer-contact-item:hover { color: #fff; }
+    .footer-contact-item i { font-size: 15px; color: rgba(255,255,255,0.3); }
+    .footer-col-head {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55);
+      text-decoration: none; transition: color 0.18s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 24px;
+      font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.3);
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-partner-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 5px 12px; border-radius: 20px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-mobile-toggle { display: block; }
+
+      .page-hero { padding: 48px 20px 80px; }
+      .page-title { font-size: 36px; }
+
+      .sec-divider { padding: 0 20px; margin: 40px 0 28px; }
+
+      .machine-section { padding: 0 20px 56px; }
+      .machine-layout { grid-template-columns: 1fr; }
+      .machine-visual { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 24px; }
+      .machine-info { padding: 28px 24px; }
+      .spec-grid { grid-template-columns: 1fr 1fr; }
+      .machine-detail-strip { grid-template-columns: 1fr; }
+      .detail-panel + .detail-panel { border-left: none; border-top: 1px solid var(--border); }
+      .detail-panel { padding: 20px 24px; }
+
+      .comparison-section { padding: 0 20px 56px; }
+      .comparison-table { font-size: 13px; }
+      .comparison-table thead th,
+      .comparison-table td { padding: 12px 14px; }
+
+      .cta-band { padding: 48px 20px; }
+      .cta-band h2 { font-size: 26px; }
+
+      footer { padding: 44px 20px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(240,244,250,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav .nav-cta-m {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--navy);
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html"><img src="sourcezy.png" class="nav-logo" alt="Sourcezy"></a>
+  <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+    <li><a href="solutions.html">Solutions</a></li>
+    <li><a href="system_showcase.html" class="active">Hardware</a></li>
+    <li><a href="support.html">Support</a></li>
+    <li><a href="company.html">Company</a></li>
+    <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Consult Expert →</a>
+  <button class="nav-mobile-toggle" aria-label="Open menu" onclick="toggleMobileNav()"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="system_showcase.html" class="active">Hardware</a>
+  <a href="support.html">Support</a>
+  <a href="company.html">Company</a>
+  <a href="bulk_inquiry.html">Bulk Inquiry</a>
+  <a href="contact.html" class="nav-cta-m">Consult Expert →</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-tag">Technical Specifications</div>
+  <h1 class="page-title">Every System, <em>In Detail</em></h1>
+  <p class="page-sub">Full specifications, security features, connectivity options, and download links for all Magicard systems supplied by Sourcezy.</p>
+  <div class="jump-nav">
+    <a href="#magicard600" class="jump-pill"><i class="ti ti-printer" aria-hidden="true"></i> 600 NEO</a>
+    <a href="#magicard300" class="jump-pill"><i class="ti ti-printer" aria-hidden="true"></i> 300 NEO</a>
+    <a href="#magicardEplus" class="jump-pill"><i class="ti ti-printer" aria-hidden="true"></i> E+ NEO</a>
+    <a href="#prima8" class="jump-pill"><i class="ti ti-printer" aria-hidden="true"></i> Prima 8</a>
+    <a href="#comparison" class="jump-pill"><i class="ti ti-table" aria-hidden="true"></i> Comparison</a>
+  </div>
+  <a href="#magicard600" class="scroll-indicator">
+    <span style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Scroll to Explore</span>
+    <i class="ti ti-chevron-down" style="font-size: 18px;"></i>
+  </a>
+</section>
+
+<!-- ───────────────── 600 NEO ───────────────── -->
+<div class="sec-divider">
+  <div class="div-line"></div>
+  <span class="div-text">Professional Series</span>
+  <div class="div-line"></div>
+</div>
+
+<section class="machine-section" id="magicard600">
+  <div class="machine-card">
+    <div class="machine-layout">
+      <div class="machine-visual">
+        <span class="machine-tier-badge tier-pro">Platinum / Professional</span>
+        <img src="images/machines/600neo.webp" alt="Magicard 600 NEO">
+      </div>
+      <div class="machine-info">
+        <div class="machine-eyebrow">Magicard · NEO Series</div>
+        <h2 class="machine-name">Magicard 600 NEO</h2>
+        <p class="machine-tagline">The highest-resolution direct-to-card printer in the Magicard range — built for security-first environments that cannot compromise on print quality or card integrity.</p>
+
+        <div class="spec-grid">
+          <div class="spec-cell">
+            <div class="spec-label">Print Resolution</div>
+            <div class="spec-value">600 DPI</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Technology</div>
+            <div class="spec-value">Direct-to-card (DTC)</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Speed</div>
+            <div class="spec-value">190 cards/hour</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Card Capacity</div>
+            <div class="spec-value">100 Cards</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Annual Volume</div>
+            <div class="spec-value">Up to 10,000+ Cards</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Card Thickness</div>
+            <div class="spec-value">0.76 mm (CR-80 standard)</div>
+          </div>
+        </div>
+
+        <div class="feature-chips">
+          <span class="fchip"><i class="ti ti-shield-check" aria-hidden="true"></i> HoloKote® Watermark</span>
+          <span class="fchip"><i class="ti ti-trash" aria-hidden="true"></i> Digital Shredding</span>
+          <span class="fchip"><i class="ti ti-lock" aria-hidden="true"></i> Holographic Security</span>
+          <span class="fchip"><i class="ti ti-file-certificate" aria-hidden="true"></i> iCure Clean System</span>
+          <span class="fchip"><i class="ti ti-rotate-clockwise" aria-hidden="true"></i> Dual-sided Option</span>
+        </div>
+
+        <div class="machine-actions">
+          <a href="brochures/600neo.pdf" class="btn-primary" download><i class="ti ti-download" aria-hidden="true"></i> Download Brochure</a>
+          <a href="contact.html" class="btn-outline">Request a Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="machine-detail-strip">
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-plug" aria-hidden="true"></i> Connectivity</div>
+        <ul class="detail-list">
+          <li>USB 2.0</li>
+          <li>Ethernet / LAN</li>
+          <li>Wi-Fi (optional)</li>
+          <li>Windows 10 / 11</li>
+        </ul>
+      </div>
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-shield-lock" aria-hidden="true"></i> Security Features</div>
+        <ul class="detail-list">
+          <li>HoloKote® Watermark</li>
+          <li>Digital Shredding</li>
+          <li>Password Lock</li>
+          <li>Secure Erase</li>
+          <li>Physical Lock Slot</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── 300 NEO ───────────────── -->
+<div class="sec-divider">
+  <div class="div-line"></div>
+  <span class="div-text">Corporate Series</span>
+  <div class="div-line"></div>
+</div>
+
+<section class="machine-section" id="magicard300">
+  <div class="machine-card">
+    <div class="machine-layout">
+      <div class="machine-visual">
+        <span class="machine-tier-badge tier-corp">Corporate / Mid-Volume</span>
+        <img src="images/machines/300neo.png" alt="Magicard 300 NEO">
+      </div>
+      <div class="machine-info">
+        <div class="machine-eyebrow">Magicard · NEO Series</div>
+        <h2 class="machine-name">Magicard 300 NEO</h2>
+        <p class="machine-tagline">The workhorse for corporate issuance programs — fast, reliable, and equipped with Magicard's signature security features at a mid-volume throughput of up to 10,000 cards per year.</p>
+
+        <div class="spec-grid">
+          <div class="spec-cell">
+            <div class="spec-label">Print Resolution</div>
+            <div class="spec-value">300 DPI</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Technology</div>
+            <div class="spec-value">Direct-to-card (DTC)</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Speed</div>
+            <div class="spec-value">160 cards/hour</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Card Capacity</div>
+            <div class="spec-value">100 Cards</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Annual Volume</div>
+            <div class="spec-value">Up to 10,000 cards/year</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Card Thickness</div>
+            <div class="spec-value">0.76 mm (CR-80 standard)</div>
+          </div>
+        </div>
+
+        <div class="feature-chips">
+          <span class="fchip"><i class="ti ti-shield-check" aria-hidden="true"></i> HoloKote® Watermark</span>
+          <span class="fchip"><i class="ti ti-refresh" aria-hidden="true"></i> iCure Clean System</span>
+          <span class="fchip"><i class="ti ti-rotate-clockwise" aria-hidden="true"></i> Dual-sided Option</span>
+          <span class="fchip"><i class="ti ti-wifi" aria-hidden="true"></i> Network Ready</span>
+        </div>
+
+        <div class="machine-actions">
+          <a href="brochures/300neo.pdf" class="btn-primary" download><i class="ti ti-download" aria-hidden="true"></i> Download Brochure</a>
+          <a href="contact.html" class="btn-outline">Request a Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="machine-detail-strip">
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-plug" aria-hidden="true"></i> Connectivity</div>
+        <ul class="detail-list">
+          <li>USB 2.0</li>
+          <li>Ethernet / LAN</li>
+          <li>Wi-Fi (optional)</li>
+          <li>Windows 10 / 11</li>
+        </ul>
+      </div>
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-shield-lock" aria-hidden="true"></i> Security Features</div>
+        <ul class="detail-list">
+          <li>HoloKote® Watermark</li>
+          <li>Password Lock</li>
+          <li>iCure Clean System</li>
+          <li>Physical Lock Slot</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── E+ NEO ───────────────── -->
+<div class="sec-divider">
+  <div class="div-line"></div>
+  <span class="div-text">Entry-Level Series</span>
+  <div class="div-line"></div>
+</div>
+
+<section class="machine-section" id="magicardEplus">
+  <div class="machine-card">
+    <div class="machine-layout">
+      <div class="machine-visual">
+        <span class="machine-tier-badge tier-entry">Entry-Level</span>
+        <img src="images/machines/E+neo.png" alt="Magicard E+ NEO">
+      </div>
+      <div class="machine-info">
+        <div class="machine-eyebrow">Magicard · NEO Series</div>
+        <h2 class="machine-name">Magicard E+ NEO</h2>
+        <p class="machine-tagline">Compact, desk-friendly, and purpose-built for small offices and low-volume issuance. All the brand security of the NEO platform without the large-format footprint.</p>
+
+        <div class="spec-grid">
+          <div class="spec-cell">
+            <div class="spec-label">Print Resolution</div>
+            <div class="spec-value">300 DPI</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Technology</div>
+            <div class="spec-value">Direct-to-card (DTC)</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Speed</div>
+            <div class="spec-value">Depends on Card mm Size</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Card Capacity</div>
+            <div class="spec-value">100 Cards</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Volume</div>
+            <div class="spec-value">Low-volume / on-demand</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Form Factor</div>
+            <div class="spec-value">Compact desktop</div>
+          </div>
+        </div>
+
+        <div class="feature-chips">
+          <span class="fchip"><i class="ti ti-shield-check" aria-hidden="true"></i> HoloKote® Watermark</span>
+          <span class="fchip"><i class="ti ti-device-desktop" aria-hidden="true"></i> Compact Footprint</span>
+          <span class="fchip"><i class="ti ti-currency-rupee" aria-hidden="true"></i> Low Entry Cost</span>
+        </div>
+
+        <div class="machine-actions">
+          <a href="brochures/magicardE.pdf" class="btn-primary" download><i class="ti ti-download" aria-hidden="true"></i> Download Brochure</a>
+          <a href="contact.html" class="btn-outline">Request a Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="machine-detail-strip">
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-plug" aria-hidden="true"></i> Connectivity</div>
+        <ul class="detail-list">
+          <li>USB 2.0</li>
+          <li>Windows 10 / 11</li>
+        </ul>
+      </div>
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-shield-lock" aria-hidden="true"></i> Security Features</div>
+        <ul class="detail-list">
+          <li>HoloKote® Watermark</li>
+          <li>Password Lock</li>
+          <li>Physical Lock Slot</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── PRIMA 8 ───────────────── -->
+<div class="sec-divider">
+  <div class="div-line"></div>
+  <span class="div-text">Industrial · Retransfer HD</span>
+  <div class="div-line"></div>
+</div>
+
+<section class="machine-section" id="prima8">
+  <div class="machine-card" style="border-color: rgba(10,42,110,0.25);">
+    <div class="machine-layout">
+      <div class="machine-visual" style="background: #0A1628;">
+        <span class="machine-tier-badge tier-industrial">Industrial</span>
+        <img src="images/machines/prima8.png" alt="Magicard Prima 8">
+      </div>
+      <div class="machine-info">
+        <div class="machine-eyebrow" style="color: var(--blue);">Magicard · Prima Series</div>
+        <h2 class="machine-name">PRIMA-802 <em style="font-style:italic; font-size:20px; color:var(--muted);">Prima 8</em></h2>
+        <p class="machine-tagline">Industrial-grade retransfer printing — over-the-edge print coverage, FIPS-201 compliance, and photo-quality output for government, defence, and high-security enterprise programs.</p>
+
+        <div class="spec-grid">
+          <div class="spec-cell">
+            <div class="spec-label">Print Resolution</div>
+            <div class="spec-value">Up to 600 DPI</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Technology</div>
+            <div class="spec-value">Retransfer HD</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Speed</div>
+            <div class="spec-value">100 cards/hour</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Card Capacity</div>
+            <div class="spec-value">100 Cards</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Compliance</div>
+            <div class="spec-value">FIPS-201 Certified</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">Print Coverage</div>
+            <div class="spec-value">Over-the-edge (full bleed)</div>
+          </div>
+        </div>
+
+        <div class="feature-chips">
+          <span class="fchip"><i class="ti ti-certificate" aria-hidden="true"></i> FIPS-201 Certified</span>
+          <span class="fchip"><i class="ti ti-photo" aria-hidden="true"></i> Photo-quality Output</span>
+          <span class="fchip"><i class="ti ti-maximize" aria-hidden="true"></i> Over-edge Print</span>
+          <span class="fchip"><i class="ti ti-shield-lock" aria-hidden="true"></i> Advanced Security</span>
+          <span class="fchip"><i class="ti ti-building-bank" aria-hidden="true"></i> Gov &amp; Defence Grade</span>
+        </div>
+
+        <div class="machine-actions">
+          <a href="brochures/prima8.pdf" class="btn-primary" download><i class="ti ti-download" aria-hidden="true"></i> Download Brochure</a>
+          <a href="contact.html" class="btn-outline">Request a Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="machine-detail-strip" style="border-top-color: var(--border);">
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-plug" aria-hidden="true"></i> Connectivity</div>
+        <ul class="detail-list">
+          <li>USB 2.0</li>
+          <li>Ethernet / LAN</li>
+          <li>Windows 10 / 11</li>
+        </ul>
+      </div>
+      <div class="detail-panel">
+        <div class="detail-heading"><i class="ti ti-shield-lock" aria-hidden="true"></i> Security Features</div>
+        <ul class="detail-list">
+          <li>FIPS-201 Compliance</li>
+          <li>Retransfer Lamination</li>
+          <li>UV Security Printing</li>
+          <li>Password Lock</li>
+          <li>Physical Lock Slot</li>
+          <li>Tamper-evident Output</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── COMPARISON TABLE ───────────────── -->
+<div class="sec-divider" id="comparison">
+  <div class="div-line"></div>
+  <span class="div-text">Side-by-Side Comparison</span>
+  <div class="div-line"></div>
+</div>
+
+<section class="comparison-section">
+  <div class="comparison-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Specification</th>
+          <th>600 NEO</th>
+          <th>300 NEO</th>
+          <th>E+ NEO</th>
+          <th>Prima 8</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-section-header">
+          <td colspan="5">Print Quality</td>
+        </tr>
+        <tr>
+          <td>Resolution</td>
+          <td>600 DPI <span class="best-badge">Highest</span></td>
+          <td>300 DPI</td>
+          <td>300 DPI</td>
+          <td>Up to 600 DPI</td>
+        </tr>
+        <tr>
+          <td>Technology</td>
+          <td>Direct-to-card</td>
+          <td>Direct-to-card</td>
+          <td>Direct-to-card</td>
+          <td>Retransfer HD <span class="best-badge">Premium</span></td>
+        </tr>
+        <tr>
+          <td>Over-edge Print</td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+        </tr>
+        <tr class="table-section-header">
+          <td colspan="5">Volume &amp; Throughput</td>
+        </tr>
+        <tr>
+          <td>Recommended Volume</td>
+          <td>Up to 10,000/yr</td>
+          <td>Up to 10,000/yr</td>
+          <td>Low / on-demand</td>
+          <td>Up to 200,000/yr</td>
+        </tr>
+        <tr>
+          <td>Dual-sided Option</td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+        </tr>
+        <tr class="table-section-header">
+          <td colspan="5">Security</td>
+        </tr>
+        <tr>
+          <td>HoloKote® Watermark</td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+        </tr>
+        <tr>
+          <td>Digital Shredding</td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+        </tr>
+        <tr>
+          <td>FIPS-201 Certified</td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+        </tr>
+        <tr class="table-section-header">
+          <td colspan="5">Connectivity</td>
+        </tr>
+        <tr>
+          <td>USB</td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+        </tr>
+        <tr>
+          <td>Ethernet / LAN</td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></td>
+        </tr>
+        <tr>
+          <td>Wi-Fi</td>
+          <td>Optional</td>
+          <td>Optional</td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+        </tr>
+        <tr class="table-section-header">
+          <td colspan="5">Downloads</td>
+        </tr>
+        <tr>
+          <td>Brochure</td>
+          <td><a href="brochures/600neo.pdf" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ PDF</a></td>
+          <td><a href="brochures/300neo.pdf" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ PDF</a></td>
+          <td><a href="brochures/magicardE.pdf" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ PDF</a></td>
+          <td><a href="brochures/prima8.pdf" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ PDF</a></td>
+        </tr>
+        <tr>
+          <td>Driver</td>
+          <td><a href="driver/magicard_NEO_Driver_v3.1.2.zip" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ ZIP</a></td>
+          <td><a href="driver/magicard_NEO_Driver_v3.1.2.zip" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ ZIP</a></td>
+          <td><a href="driver/Magicard_Driver.exe" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ EXE</a></td>
+          <td><a href="driver/prima_4_8_600dpi_driver.zip" style="color:var(--blue); text-decoration:none; font-size:13px;" download>↓ ZIP</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>Not sure which system fits your volume?</h2>
+  <p>Our experts help you match the right hardware to your issuance program — from small deployments to large-scale South India rollouts.</p>
+  <div class="cta-band-row">
+    <a href="contact.html" class="btn-white">Speak to an Expert →</a>
+    <a href="bulk_inquiry.html" class="btn-outline-white">Bulk Inquiry</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="sourcezy.png" alt="Sourcezy" class="footer-brand-logo">
+      <p class="footer-tagline">Magicard Solutions Reseller in India — supplying card printers, ribbons, and consumables to banks, hospitals, schools, and government offices across South India.</p>
+      <a href="tel:+919886554160" class="footer-contact-item"><i class="ti ti-phone" aria-hidden="true"></i> +91 98865 54160</a>
+      <a href="tel:+919964301093" class="footer-contact-item"><i class="ti ti-phone" aria-hidden="true"></i> +91 99643 01093</a>
+      <a href="mailto:sales@sourcezy.in" class="footer-contact-item"><i class="ti ti-mail" aria-hidden="true"></i> sales@sourcezy.in</a>
+      <span class="footer-contact-item"><i class="ti ti-map-pin" aria-hidden="true"></i> Bengaluru, Karnataka, India</span>
+      <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left;">
+        <img src="images/google-review-qr.png" alt="Google Review QR Code" style="width: 50px; height: 50px; background: #fff; padding: 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
+        <div>
+          <span style="display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">Google Maps</span>
+          <a href="https://q.me-qr.com/6zvjel56" target="_blank" rel="noopener" style="font-size: 13px; color: #2B7BE5; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin: 0;">Write a review <i class="ti ti-external-link" aria-hidden="true" style="font-size: 11px;"></i></a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-head">Solutions</div>
+      <ul class="footer-links">
+        <li><a href="solutions.html">All Hardware</a></li>
+        <li><a href="system_showcase.html#magicard600">600 NEO</a></li>
+        <li><a href="system_showcase.html#magicard300">300 NEO</a></li>
+        <li><a href="system_showcase.html#magicardEplus">E+ NEO</a></li>
+        <li><a href="system_showcase.html#prima8">Prima 8</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Company</div>
+      <ul class="footer-links">
+        <li><a href="company.html">About Us</a></li>
+        <li><a href="company.html#partnership">Our Story</a></li>
+        <li><a href="support.html">Support Hub</a></li>
+        <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Contact</div>
+      <ul class="footer-links">
+        <li><a href="contact.html">Get in Touch</a></li>
+        <li><a href="mailto:sales@sourcezy.in">Email Us</a></li>
+        <li><a href="tel:+919886554160">Call Us</a></li>
+        <li><a href="support.html">Driver Downloads</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Sourcezy. All rights reserved.</span>
+    <span class="footer-partner-badge"><i class="ti ti-rosette" aria-hidden="true"></i> Magicard Solutions Reseller · India</span>
+  </div>
+</footer>
+<script>
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  // Redirect mailto links directly to Gmail
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link && link.href && link.href.startsWith('mailto:')) {
+      e.preventDefault();
+      const mailtoHref = link.href.substring(7);
+      const parts = mailtoHref.split('?');
+      const to = decodeURIComponent(parts[0]);
+      let subject = '';
+      let body = '';
+      if (parts[1]) {
+        const params = new URLSearchParams(parts[1]);
+        subject = params.get('subject') || '';
+        body = params.get('body') || '';
+      }
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank');
+    }
+  });
+</script>
+</body>
+</html>

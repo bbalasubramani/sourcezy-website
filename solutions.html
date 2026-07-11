@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware Lineup — Sourcezy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F0F4FA;
+      --white:   #ffffff;
+      --navy:    #0A2A6E;
+      --blue:    #2B7BE5;
+      --ink:     #0A1628;
+      --muted:   #5A6A82;
+      --hint:    #8A9BB5;
+      --border:  #D8E2F0;
+      --surface: #E8EEF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(240,244,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo { height: 32px; display: block; }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); font-weight: 500; }
+    .nav-cta {
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 22px;
+      color: var(--ink);
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: radial-gradient(circle at 50% 50%, #ffffff 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 48px 96px;
+      text-align: center;
+      min-height: calc(100vh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--hint);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .scroll-indicator:hover {
+      color: var(--blue);
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -6px); }
+      60% { transform: translate(-50%, -3px); }
+    }
+    .page-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(43,123,229,0.06);
+      border: 1px solid rgba(43,123,229,0.4);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; color: var(--blue); }
+    .page-sub {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .sec-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 48px;
+      margin: 56px 0 40px;
+    }
+    .div-line { flex: 1; height: 1px; background: var(--border); }
+    .div-text {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hint);
+      white-space: nowrap;
+    }
+
+    /* ── FILTER STRIP ── */
+    .filter-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 48px 40px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .filter-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    /* ── PRODUCT GRID ── */
+    .products-wrap {
+      padding: 0 48px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .product-card:hover {
+      border-color: rgba(43,123,229,0.35);
+      transform: translateY(-2px);
+    }
+    .product-img-wrap {
+      background: var(--surface);
+      border-radius: 8px;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .product-img-wrap img {
+      max-height: 170px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .img-placeholder {
+      background: var(--surface);
+      border: 1px dashed #B0C4E0;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      color: var(--hint);
+      font-size: 13px;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .ctag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hint);
+      margin-bottom: 8px;
+    }
+    .tier-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+    .tier-platinum { background: rgba(43,123,229,0.1); color: var(--blue); border: 1px solid rgba(43,123,229,0.3); }
+    .tier-corporate { background: rgba(10,42,110,0.08); color: var(--navy); border: 1px solid rgba(10,42,110,0.2); }
+    .tier-entry    { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+    .tier-industrial { background: rgba(10,22,40,0.07); color: var(--ink); border: 1px solid rgba(10,22,40,0.18); }
+    .ctitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .cbody {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .card-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .spec-chip {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--blue);
+      text-decoration: none;
+      margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+
+    /* navy & blue card variants (for featured / highlight) */
+    .product-card.navy {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .product-card.navy .ctitle { color: #fff; }
+    .product-card.navy .cbody { color: rgba(255,255,255,0.65); }
+    .product-card.navy .ctag { color: rgba(255,255,255,0.45); }
+    .product-card.navy .spec-chip { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+    .product-card.navy .card-link { color: #7EB8FF; }
+    .product-card.navy .tier-badge { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.2); }
+    .product-card.navy .product-img-wrap { background: rgba(255,255,255,0.08); }
+
+    /* ── RIBBONS SECTION ── */
+    .ribbons-section {
+      padding: 0 48px 80px;
+    }
+    .ribbons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .ribbon-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .ribbon-card:hover {
+      border-color: rgba(43,123,229,0.35);
+      transform: translateY(-2px);
+    }
+    .ribbon-img-wrap {
+      background: #f8fafc;
+      border-radius: 8px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .ribbon-img-wrap img {
+      max-height: 180px;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 0.2s;
+    }
+    .ribbon-card:hover .ribbon-img-wrap img {
+      transform: scale(1.03);
+    }
+    .ribbon-card .ctag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .ribbon-card .ctitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .ribbon-meta {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .ribbon-meta-item {
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .ribbon-card .cbody {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    /* ── COMPATIBILITY NOTE ── */
+    .compat-note {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin: 12px 0 0;
+    }
+    .compat-note-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(43,123,229,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .compat-note h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .compat-note p { font-size: 13px; color: var(--muted); }
+
+    /* ── COVERAGE STRIP ── */
+    .coverage-strip {
+      padding: 0 48px 64px;
+    }
+    .coverage-inner {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .coverage-stat { text-align: center; }
+    .coverage-stat .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .coverage-stat .lbl {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hint);
+    }
+    .coverage-divider { width: 1px; height: 48px; background: var(--border); }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--navy);
+      padding: 64px 48px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .cta-band p {
+      color: rgba(255,255,255,0.65);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+    .cta-band-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 30px;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline-white {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.25);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 14px 30px;
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.55); color: #fff; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--ink);
+      padding: 56px 48px 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+    .footer-brand img { height: 28px; margin-bottom: 14px; filter: brightness(0) invert(1); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 20px; }
+    .footer-contact a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: #fff; }
+    .footer-contact i { font-size: 15px; }
+    .footer-col h5 {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-badge {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+
+      .page-hero { padding: 40px 20px 80px; }
+      .page-title { font-size: 36px; }
+
+      .sec-divider { padding: 0 20px; margin: 40px 0 28px; }
+
+      .filter-strip { padding: 0 20px 28px; }
+
+      .products-wrap { padding: 0 20px; }
+      .products-grid { grid-template-columns: 1fr; }
+
+      .ribbons-section { padding: 0 20px 56px; }
+      .ribbons-grid { grid-template-columns: 1fr; }
+
+      .coverage-strip { padding: 0 20px 48px; }
+      .coverage-inner { padding: 28px 24px; justify-content: center; }
+      .coverage-divider { display: none; }
+
+      .cta-band { padding: 48px 20px; }
+      .cta-band h2 { font-size: 26px; }
+
+      .footer { padding: 48px 20px 28px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    /* ── MOBILE NAV DRAWER ── */
+    .mobile-nav-open .nav-links {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(240,244,250,0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 20px;
+      gap: 20px;
+      z-index: 99;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html"><img src="sourcezy.png" class="nav-logo" alt="Sourcezy" /></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="solutions.html" class="active">Solutions</a></li>
+      <li><a href="system_showcase.html">Hardware</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="company.html">Company</a></li>
+      <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Consult Expert →</a>
+    <button class="nav-mobile-toggle" aria-label="Open menu" onclick="document.getElementById('mainNav').closest('body').classList.toggle('mobile-nav-open')">
+      <i class="ti ti-menu-2" aria-hidden="true"></i>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-tag">Hardware Lineup</div>
+    <h1 class="page-title">Card Printers &amp; <em>Consumables</em></h1>
+    <p class="page-sub">Official Magicard NEO and Prima systems — professional-grade ID issuance for every deployment scale.</p>
+    
+    <!-- FILTER STRIP -->
+    <div style="margin-top: 32px; width: 100%;">
+      <div class="filter-strip" id="filterStrip">
+        <button class="filter-btn active" data-filter="all">All Systems</button>
+        <button class="filter-btn" data-filter="neo">NEO Series</button>
+        <button class="filter-btn" data-filter="retransfer">Retransfer HD</button>
+        <button class="filter-btn" data-filter="consumables">Ribbons &amp; Consumables</button>
+      </div>
+    </div>
+
+    <a href="#section-printers" class="scroll-indicator">
+      <span style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Scroll to Explore</span>
+      <i class="ti ti-chevron-down" style="font-size: 18px;"></i>
+    </a>
+  </section>
+
+  <!-- PRINTER SECTION LABEL -->
+  <div class="sec-divider" id="section-printers">
+    <div class="div-line"></div>
+    <span class="div-text">Card Printer Systems</span>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="products-wrap" id="productGrid">
+    <div class="products-grid">
+
+      <!-- 600 NEO -->
+      <div class="product-card" data-cat="neo">
+        <div class="product-img-wrap">
+          <a href="system_showcase.html#magicard600"><img src="images/machines/600neo.webp" alt="Magicard 600 NEO"></a>
+        </div>
+        <div class="ctag">Direct-to-card · Professional</div>
+        <span class="tier-badge tier-platinum">Platinum Tier</span>
+        <h3 class="ctitle">Magicard 600 NEO</h3>
+        <p class="cbody">High-volume flagship with 600 DPI resolution and digital shredding — built for banks, large corporates, and government identity programmes that demand photographic-quality cards at scale.</p>
+        <div class="card-specs">
+          <span class="spec-chip">600 DPI</span>
+          <span class="spec-chip">HoloKote™ Security</span>
+          <span class="spec-chip">Digital Shredding</span>
+          <span class="spec-chip">Dual-sided</span>
+        </div>
+        <a href="system_showcase.html#magicard600" class="card-link">
+          View full specifications <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- 300 NEO -->
+      <div class="product-card" data-cat="neo">
+        <div class="product-img-wrap">
+          <a href="system_showcase.html#magicard300"><img src="images/machines/300neo.png" alt="Magicard 300 NEO"></a>
+        </div>
+        <div class="ctag">Direct-to-card · Corporate</div>
+        <span class="tier-badge tier-corporate">Corporate Tier</span>
+        <h3 class="ctitle">Magicard 300 NEO</h3>
+        <p class="cbody">Mid-volume workhorse trusted by hospitals, universities, and enterprise HR departments. Handles up to 10,000 cards per year with consistent, reliable output and built-in HoloKote security.</p>
+        <div class="card-specs">
+          <span class="spec-chip">300 DPI</span>
+          <span class="spec-chip">HoloKote™ Security</span>
+          <span class="spec-chip">Up to 10,000 cards/yr</span>
+          <span class="spec-chip">USB &amp; Ethernet</span>
+        </div>
+        <a href="system_showcase.html#magicard300" class="card-link">
+          View full specifications <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- E+ NEO -->
+      <div class="product-card" data-cat="neo">
+        <div class="product-img-wrap">
+          <a href="system_showcase.html#magicardEplus"><img src="images/machines/E+neo.png" alt="Magicard E+ NEO"></a>
+        </div>
+        <div class="ctag">Direct-to-card · Entry-level</div>
+        <span class="tier-badge tier-entry">Entry Tier</span>
+        <h3 class="ctitle">Magicard E+ NEO</h3>
+        <p class="cbody">Compact, desk-friendly design for smaller offices, retail branches, and event teams. Inherits Magicard's core brand security features at an accessible entry price — without compromising card quality.</p>
+        <div class="card-specs">
+          <span class="spec-chip">Compact Form Factor</span>
+          <span class="spec-chip">HoloKote™ Security</span>
+          <span class="spec-chip">Low Volume</span>
+          <span class="spec-chip">USB</span>
+        </div>
+        <a href="system_showcase.html#magicardEplus" class="card-link">
+          View full specifications <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- PRIMA 8 — highlighted in navy -->
+      <div class="product-card navy" data-cat="retransfer">
+        <div class="product-img-wrap">
+          <a href="system_showcase.html#prima8"><img src="images/machines/prima8.png" alt="PRIMA-802 (Prima 8)"></a>
+        </div>
+        <span class="tier-badge">Industrial Tier</span>
+        <h3 class="ctitle ctitle-lt" style="color:#fff;">PRIMA-802 (Prima 8)</h3>
+        <p class="cbody cbody-lt" style="color:rgba(255,255,255,0.65);">Retransfer printing for photo-quality, over-the-edge cards used in national ID programmes, FIPS-201 compliance, and high-security government issuance. Produces cards that are visually indistinguishable from government-issued credentials.</p>
+        <div class="card-specs">
+          <span class="spec-chip">Retransfer HD</span>
+          <span class="spec-chip">FIPS-201 Compliant</span>
+          <span class="spec-chip">Over-edge Print</span>
+          <span class="spec-chip">Photo-quality</span>
+        </div>
+        <a href="system_showcase.html#prima8" class="card-link" style="color:#7EB8FF;">
+          View full specifications <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div><!-- /products-grid -->
+  </div><!-- /products-wrap -->
+
+  <!-- STATS / COVERAGE -->
+  <div class="sec-divider">
+    <div class="div-line"></div>
+    <span class="div-text">Deployment Scale</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="coverage-strip">
+    <div class="coverage-inner">
+      <div class="coverage-stat">
+        <div class="num">500+</div>
+        <div class="lbl">Systems Deployed</div>
+      </div>
+      <div class="coverage-divider"></div>
+      <div class="coverage-stat">
+        <div class="num">South India</div>
+        <div class="lbl">Delivery &amp; Support</div>
+      </div>
+      <div class="coverage-divider"></div>
+      <div class="coverage-stat">
+        <div class="num">40+</div>
+        <div class="lbl">Enterprise Clients</div>
+      </div>
+      <div class="coverage-divider"></div>
+      <div class="coverage-stat">
+        <div class="num">Reseller</div>
+        <div class="lbl">Magicard Solutions Reseller</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSUMABLES SECTION -->
+  <div class="sec-divider" id="section-consumables">
+    <div class="div-line"></div>
+    <span class="div-text">Ribbons &amp; Consumables</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="ribbons-section">
+    <div class="ribbons-grid">
+
+      <!-- Magicard MA300YMCKO -->
+      <div class="ribbon-card">
+        <div class="ribbon-img-wrap">
+          <a href="images/ribbons/ma300ymcko.png" target="_blank" title="View Full Image"><img src="images/ribbons/ma300ymcko.png" alt="Magicard MA300YMCKO Dye Film"></a>
+        </div>
+        <div class="ctag">Genuine Magicard</div>
+        <h3 class="ctitle">MA300YMCKO Dye Film</h3>
+        <div class="ribbon-meta">
+          <span class="ribbon-meta-item">YMCKO (5-Panel)</span>
+          <span class="ribbon-meta-item">300 Prints</span>
+          <span class="ribbon-meta-item">Magicard 300 &amp; 300 NEO</span>
+        </div>
+        <p class="cbody">Five-panel full-colour ribbon with a clear protective overlay panel. Delivers vibrant photo-quality print output. Includes an integrated cleaning spool to keep your printer in pristine condition.</p>
+      </div>
+
+      <!-- ekapad EK300YMCKO/4 -->
+      <div class="ribbon-card">
+        <div class="ribbon-img-wrap">
+          <a href="images/ribbons/ek300ymcko.png" target="_blank" title="View Full Image"><img src="images/ribbons/ek300ymcko.png" alt="ekapad EK300YMCKO/4 Dye Film"></a>
+        </div>
+        <div class="ctag">ekapad Premium</div>
+        <h3 class="ctitle">EK300YMCKO/4 Dye Film</h3>
+        <div class="ribbon-meta">
+          <span class="ribbon-meta-item">YMCKO (5-Panel)</span>
+          <span class="ribbon-meta-item">300 Prints</span>
+          <span class="ribbon-meta-item">Magicard NEO Series</span>
+        </div>
+        <p class="cbody">High-grade compatible dye film and cleaning spool from ekapad™. Specifically designed to offer crisp resin-black barcodes/text and vibrant colors on Magicard NEO direct-to-card printers.</p>
+      </div>
+
+      <!-- ekapad EK250YMCKOKO-HF/4 -->
+      <div class="ribbon-card">
+        <div class="ribbon-img-wrap">
+          <a href="images/ribbons/ek250ymckoko.png" target="_blank" title="View Full Image"><img src="images/ribbons/ek250ymckoko.png" alt="ekapad EK250YMCKOKO-HF/4 Dye Film"></a>
+        </div>
+        <div class="ctag">ekapad Premium</div>
+        <h3 class="ctitle">EK250YMCKOKO-HF/4 Dye Film</h3>
+        <div class="ribbon-meta">
+          <span class="ribbon-meta-item">YMCKOKO (7-Panel)</span>
+          <span class="ribbon-meta-item">250 Double-Sided Prints</span>
+          <span class="ribbon-meta-item">Magicard NEO Series</span>
+        </div>
+        <p class="cbody">Dual-sided printing ribbon featuring extra resin black and protective overlay panels. Perfect for printing full-colour fronts and monochrome black text/barcodes on backs with dual overlay protection.</p>
+      </div>
+
+      <!-- Magicard MA250YMCKO-HF -->
+      <div class="ribbon-card">
+        <div class="ribbon-img-wrap">
+          <a href="images/ribbons/ma250ymcko.png" target="_blank" title="View Full Image"><img src="images/ribbons/ma250ymcko.png" alt="Magicard MA250YMCKO-HF Dye Film"></a>
+        </div>
+        <div class="ctag">Genuine Magicard</div>
+        <h3 class="ctitle">MA250YMCKO-HF Dye Film</h3>
+        <div class="ribbon-meta">
+          <span class="ribbon-meta-item">YMCKO-HF (5-Panel)</span>
+          <span class="ribbon-meta-item">250 Prints</span>
+          <span class="ribbon-meta-item">Magicard 600 &amp; 600 NEO</span>
+        </div>
+        <p class="cbody">High-definition dye film ribbon with cleaning spool. Crafted specifically to utilize the ultra-high resolution 600 DPI printing capabilities of the Magicard 600/600 NEO printer series.</p>
+      </div>
+
+      <!-- Magicard MA1000K-BLACK -->
+      <div class="ribbon-card">
+        <div class="ribbon-img-wrap">
+          <a href="images/ribbons/ma1000k_black.png" target="_blank" title="View Full Image"><img src="images/ribbons/ma1000k_black.png" alt="Magicard MA1000K-BLACK Monochrome Ribbon"></a>
+        </div>
+        <div class="ctag">Genuine Magicard</div>
+        <h3 class="ctitle">MA1000K-BLACK Dye Film</h3>
+        <div class="ribbon-meta">
+          <span class="ribbon-meta-item">Monochrome Black Resin</span>
+          <span class="ribbon-meta-item">1000 Prints</span>
+          <span class="ribbon-meta-item">All Magicard ID Printers</span>
+        </div>
+        <p class="cbody">High-yield black resin monochrome ribbon with integrated cleaning spool. Ideal for sharp text, detailed barcodes, and serial numbering where cost-per-card efficiency is key.</p>
+      </div>
+
+      <!-- Magicard Long Cleaning Card -->
+      <div class="ribbon-card">
+        <div class="ribbon-img-wrap">
+          <a href="images/ribbons/cleaning_kit.png" target="_blank" title="View Full Image"><img src="images/ribbons/cleaning_kit.png" alt="Magicard Long Cleaning Card &amp; Pen Kit"></a>
+        </div>
+        <div class="ctag">Maintenance Kit</div>
+        <h3 class="ctitle">Long Cleaning Card &amp; Pen Kit</h3>
+        <div class="ribbon-meta">
+          <span class="ribbon-meta-item">T-Cards &amp; Cleaning Pen</span>
+          <span class="ribbon-meta-item">Every 1000/5000 Cards</span>
+          <span class="ribbon-meta-item">All Magicard Printers</span>
+        </div>
+        <p class="cbody">Includes pre-saturated long cleaning cards and a 5.8ml IPA cleaning pen. Crucial for cleaning the printhead, transport rollers, and magnetic encoder. Use whenever the printer prompts to maintain print quality.</p>
+      </div>
+
+    </div>
+
+    <!-- Compatibility note -->
+    <div class="compat-note">
+      <div class="compat-note-icon"><i class="ti ti-info-circle" aria-hidden="true"></i></div>
+      <div>
+        <h4>Ribbon Compatibility &amp; Care</h4>
+        <p>All Magicard NEO ribbons use the proprietary iSeries ribbon cartridge format. We supply both genuine Magicard consumables and premium compatible ekapad™ ribbons to meet your specific budget and printing needs. Contact <a href="mailto:sales@sourcezy.in" style="color:var(--blue);">sales@sourcezy.in</a> to confirm compatibility for your specific printer model.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <h2>Not sure which system fits your volume?</h2>
+    <p>Our engineers will match the right printer and ribbon combination to your deployment — at no consulting fee.</p>
+    <div class="cta-band-row">
+      <a href="contact.html" class="btn-white">Talk to an Expert →</a>
+      <a href="bulk_inquiry.html" class="btn-outline-white">Submit Bulk Inquiry</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="sourcezy.png" alt="Sourcezy" />
+        <p class="footer-tagline">Magicard Solutions Reseller providing professional ID issuance hardware, ribbons, and support across South India.</p>
+        <div class="footer-contact">
+          <a href="tel:+919886554160"><i class="ti ti-phone" aria-hidden="true"></i> +91 98865 54160</a>
+          <a href="tel:+919964301093"><i class="ti ti-phone" aria-hidden="true"></i> +91 99643 01093</a>
+          <a href="mailto:sales@sourcezy.in"><i class="ti ti-mail" aria-hidden="true"></i> sales@sourcezy.in</a>
+          <a href="#"><i class="ti ti-map-pin" aria-hidden="true"></i> Bengaluru, Karnataka, India</a>
+        </div>
+        <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left;">
+          <img src="images/google-review-qr.png" alt="Google Review QR Code" style="width: 50px; height: 50px; background: #fff; padding: 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
+          <div>
+            <span style="display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">Google Maps</span>
+            <a href="https://q.me-qr.com/6zvjel56" target="_blank" rel="noopener" style="font-size: 13px; color: #2B7BE5; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin: 0;">Write a review <i class="ti ti-external-link" aria-hidden="true" style="font-size: 11px;"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="solutions.html">All Printers</a></li>
+          <li><a href="system_showcase.html#magicard600">Magicard 600 NEO</a></li>
+          <li><a href="system_showcase.html#magicard300">Magicard 300 NEO</a></li>
+          <li><a href="system_showcase.html#magicardEplus">Magicard E+ NEO</a></li>
+          <li><a href="system_showcase.html#prima8">Prima 8</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="company.html">About Us</a></li>
+          <li><a href="company.html#partnership">Our Story</a></li>
+          <li><a href="support.html">Support Hub</a></li>
+          <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="contact.html">Get in Touch</a></li>
+          <li><a href="mailto:sales@sourcezy.in">Email Us</a></li>
+          <li><a href="tel:+919886554160">Call Us</a></li>
+          <li><a href="bulk_inquiry.html">Enterprise Inquiry</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Sourcezy. All rights reserved.</span>
+      <span class="footer-badge">Magicard Solutions Reseller · India</span>
+    </div>
+  </footer>
+
+  <!-- FILTER JS -->
+  <script>
+    // Filter logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('#productGrid .product-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        // Update active state
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (filter === 'consumables') {
+          // Scroll to consumables section
+          document.getElementById('section-consumables').scrollIntoView({ behavior: 'smooth' });
+          productCards.forEach(card => card.style.display = '');
+          return;
+        }
+
+        if (filter === 'all') {
+          productCards.forEach(card => {
+            card.style.display = '';
+            card.style.opacity = '1';
+          });
+          return;
+        }
+
+        productCards.forEach(card => {
+          const cat = card.dataset.cat;
+          if (cat === filter) {
+            card.style.display = '';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Redirect mailto links directly to Gmail
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (link && link.href && link.href.startsWith('mailto:')) {
+        e.preventDefault();
+        const mailtoHref = link.href.substring(7);
+        const parts = mailtoHref.split('?');
+        const to = decodeURIComponent(parts[0]);
+        let subject = '';
+        let body = '';
+        if (parts[1]) {
+          const params = new URLSearchParams(parts[1]);
+          subject = params.get('subject') || '';
+          body = params.get('body') || '';
+        }
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(gmailUrl, '_blank');
+      }
+    });
+  </script>
+
+</body>
+</html>

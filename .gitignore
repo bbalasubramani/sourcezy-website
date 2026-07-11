@@ -1,0 +1,9 @@
+# Local environment variables containing database credentials
+.env
+
+# Dependencies
+node_modules/
+
+# Vercel build outputs and CLI configuration
+.vercel/
+.vercel

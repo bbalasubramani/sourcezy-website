@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — Sourcezy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F0F4FA;
+      --white:   #ffffff;
+      --navy:    #0A2A6E;
+      --blue:    #2B7BE5;
+      --ink:     #0A1628;
+      --muted:   #5A6A82;
+      --hint:    #8A9BB5;
+      --border:  #D8E2F0;
+      --surface: #E8EEF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(240,244,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      gap: 40px;
+    }
+    .nav-logo { height: 32px; display: block; }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--navy);
+      padding: 9px 20px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--ink);
+      margin-left: auto;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: radial-gradient(circle at 50% 50%, #ffffff 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 48px 96px;
+      text-align: center;
+      min-height: calc(100vh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--hint);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .scroll-indicator:hover {
+      color: var(--blue);
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -6px); }
+      60% { transform: translate(-50%, -3px); }
+    }
+    .page-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      border: 1px solid rgba(43,123,229,0.4);
+      background: rgba(43,123,229,0.06);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 56px;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; }
+    .page-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .sec-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 48px 40px;
+    }
+    .div-line { flex: 1; height: 1px; background: var(--border); }
+    .div-text {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--hint);
+      white-space: nowrap;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 72px 48px; }
+    .section-white { background: var(--white); }
+    .section-bg { background: var(--bg); }
+
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .section-header h2 em { font-style: italic; }
+    .section-header p { color: var(--muted); font-size: 15px; max-width: 480px; margin: 0 auto; }
+
+    /* ── DRIVER CARDS ── */
+    .driver-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .driver-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .driver-card:hover {
+      border-color: rgba(43,123,229,0.35);
+      transform: translateY(-2px);
+    }
+
+    .driver-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .driver-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .os-badge {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--hint);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .ctag {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--hint);
+    }
+    .ctitle {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .cbody {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .driver-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .meta-chip {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 3px 9px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 18px;
+      margin-top: 4px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-download:hover {
+      border-color: rgba(43,123,229,0.4);
+      background: rgba(43,123,229,0.04);
+    }
+    .btn-download i { font-size: 15px; color: var(--blue); }
+
+    /* EXE badge */
+    .exe-badge {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--navy);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+
+    /* ── FIRMWARE / MANUALS ── */
+    .placeholder-card {
+      background: var(--surface);
+      border: 1px dashed #B0C4E0;
+      border-radius: 14px;
+      padding: 36px 28px;
+      text-align: center;
+      color: var(--hint);
+      font-size: 13px;
+    }
+    .placeholder-card i { font-size: 28px; margin-bottom: 10px; display: block; opacity: 0.5; }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(43,123,229,0.35); }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .faq-q:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+    .faq-chevron {
+      font-size: 18px;
+      color: var(--hint);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--blue); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.25s;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 24px 20px;
+    }
+    .faq-a p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .faq-a a { color: var(--blue); text-decoration: none; }
+    .faq-a a:hover { text-decoration: underline; }
+
+    /* ── TICKET CTA STRIP ── */
+    .ticket-strip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .ticket-strip-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .ticket-strip-text p { font-size: 14px; color: var(--muted); }
+    .ticket-strip-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--navy);
+      padding: 12px 24px;
+      border-radius: 4px;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 4px;
+      transition: border-color 0.15s;
+    }
+    .btn-outline:hover { border-color: rgba(43,123,229,0.4); }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--navy);
+      padding: 72px 48px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .cta-band h2 em { font-style: italic; }
+    .cta-band p { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 32px; }
+    .cta-band-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--white);
+      padding: 14px 30px;
+      border-radius: 4px;
+      transition: opacity 0.15s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 14px 30px;
+      border-radius: 4px;
+      transition: border-color 0.15s;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.55); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 56px 48px 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand img { height: 28px; filter: brightness(0) invert(1); margin-bottom: 14px; display: block; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 220px; }
+    .footer-brand .contact-links { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .footer-brand .contact-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color 0.15s;
+    }
+    .footer-brand .contact-links a:hover { color: #fff; }
+    .footer-brand .contact-links i { font-size: 14px; }
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-col ul a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.28); }
+    .footer-partner-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 4px 14px;
+    }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0; right: 0;
+      background: rgba(240,244,250,0.98);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      text-decoration: none;
+      font-size: 15px;
+      color: var(--muted);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav .nav-cta-m {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--navy);
+      padding: 12px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-mobile-toggle { display: block; }
+
+      .page-hero { padding: 40px 20px 80px; }
+      .page-title { font-size: 36px; }
+
+      .sec-divider { margin: 0 20px 32px; }
+
+      .section { padding: 48px 20px; }
+
+      .driver-grid, .resource-grid { grid-template-columns: 1fr; }
+
+      .ticket-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 24px;
+        gap: 20px;
+      }
+      .ticket-strip-actions { width: 100%; }
+      .ticket-strip-actions a { flex: 1; justify-content: center; }
+
+      .cta-band { padding: 48px 20px; }
+      .cta-band h2 { font-size: 26px; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: span 2; }
+      footer { padding: 40px 20px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="index.html"><img src="sourcezy.png" class="nav-logo" alt="Sourcezy"></a>
+  <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+    <li><a href="solutions.html">Solutions</a></li>
+    <li><a href="system_showcase.html">Hardware</a></li>
+    <li><a href="support.html" style="color:#0A1628;font-weight:500">Support</a></li>
+    <li><a href="company.html">Company</a></li>
+    <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Consult Expert →</a>
+  <button class="nav-mobile-toggle" aria-label="Open menu" onclick="toggleMobileNav()">
+    <i class="ti ti-menu-2" aria-hidden="true"></i>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="system_showcase.html">Hardware</a>
+  <a href="support.html" style="color:#0A1628;font-weight:500">Support</a>
+  <a href="company.html">Company</a>
+  <a href="bulk_inquiry.html">Bulk Inquiry</a>
+  <a href="contact.html" class="nav-cta-m">Consult Expert →</a>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="page-tag">Support Hub</div>
+  <h1 class="page-title">Drivers &amp; <em>Resources</em></h1>
+  <p class="page-sub">Download the latest drivers, access firmware, and get answers — everything you need to keep your Sourcezy system running.</p>
+  <a href="#drivers" class="scroll-indicator">
+    <span style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Scroll to Explore</span>
+    <i class="ti ti-chevron-down" style="font-size: 18px;"></i>
+  </a>
+</section>
+
+<!-- ── DRIVER DOWNLOADS ── -->
+<section class="section section-white" id="drivers">
+  <div class="sec-divider">
+    <div class="div-line"></div>
+    <span class="div-text">Driver Downloads</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="section-header">
+    <h2>Official <em>Magicard Drivers</em></h2>
+    <p>All drivers are sourced directly from Magicard and validated by Sourcezy for use in India.</p>
+  </div>
+
+  <div class="driver-grid">
+
+    <!-- NEO Series ZIP -->
+    <div class="driver-card">
+      <div class="driver-card-top">
+        <div class="driver-icon">
+          <i class="ti ti-printer" aria-hidden="true"></i>
+        </div>
+        <span class="os-badge">Windows 10 / 11</span>
+      </div>
+      <span class="ctag">NEO Series</span>
+      <h3 class="ctitle">Magicard NEO Driver</h3>
+      <p class="cbody">Recommended driver for Magicard 600 NEO, 300 NEO, and E+ NEO printers. Supports full colour, monochrome, and security encoding modes.</p>
+      <div class="driver-meta">
+        <span class="meta-chip">v3.1.2</span>
+        <span class="meta-chip">ZIP Archive</span>
+        <span class="meta-chip">64-bit</span>
+      </div>
+      <a href="driver/magicard_NEO_Driver_v3.1.2.zip" class="btn-download" download>
+        <i class="ti ti-download" aria-hidden="true"></i>
+        Download ZIP
+      </a>
+    </div>
+
+    <!-- Windows EXE Installer -->
+    <div class="driver-card">
+      <div class="driver-card-top">
+        <div class="driver-icon">
+          <i class="ti ti-device-desktop" aria-hidden="true"></i>
+        </div>
+        <span class="os-badge">Windows</span>
+      </div>
+      <span class="ctag">Core Driver</span>
+      <h3 class="ctitle">Magicard Windows Installer
+        <span class="exe-badge">EXE</span>
+      </h3>
+      <p class="cbody">Standalone executable installer for Windows systems. Run directly without extraction — recommended for most enterprise deployments.</p>
+      <div class="driver-meta">
+        <span class="meta-chip">EXE Installer</span>
+        <span class="meta-chip">All NEO Models</span>
+      </div>
+      <a href="driver/Magicard_Driver.exe" class="btn-download" download>
+        <i class="ti ti-download" aria-hidden="true"></i>
+        Download EXE
+      </a>
+    </div>
+
+    <!-- Prima 4/8 — 300 DPI -->
+    <div class="driver-card">
+      <div class="driver-card-top">
+        <div class="driver-icon">
+          <i class="ti ti-layers-difference" aria-hidden="true"></i>
+        </div>
+        <span class="os-badge">Windows 10 / 11</span>
+      </div>
+      <span class="ctag">PRIMA-802 · Retransfer</span>
+      <h3 class="ctitle">Prima 4 / 8 Driver — 300 DPI</h3>
+      <p class="cbody">Driver package for Prima 4 and Prima 8 retransfer printers operating at 300 DPI output. Suitable for standard photo-quality card issuance.</p>
+      <div class="driver-meta">
+        <span class="meta-chip">300 DPI</span>
+        <span class="meta-chip">ZIP Archive</span>
+        <span class="meta-chip">64-bit</span>
+      </div>
+      <a href="driver/prima_4_8_300dpi_driver.zip" class="btn-download" download>
+        <i class="ti ti-download" aria-hidden="true"></i>
+        Download ZIP
+      </a>
+    </div>
+
+    <!-- Prima 4/8 — 600 DPI -->
+    <div class="driver-card">
+      <div class="driver-card-top">
+        <div class="driver-icon">
+          <i class="ti ti-layers-difference" aria-hidden="true"></i>
+        </div>
+        <span class="os-badge">Windows 10 / 11</span>
+      </div>
+      <span class="ctag">PRIMA-802 · Retransfer HD</span>
+      <h3 class="ctitle">Prima 4 / 8 Driver — 600 DPI</h3>
+      <p class="cbody">High-resolution driver for Prima 4 and Prima 8 systems at 600 DPI. Required for FIPS-201 and biometric-grade card programmes.</p>
+      <div class="driver-meta">
+        <span class="meta-chip">600 DPI</span>
+        <span class="meta-chip">ZIP Archive</span>
+        <span class="meta-chip">64-bit</span>
+      </div>
+      <a href="driver/prima_4_8_600dpi_driver.zip" class="btn-download" download>
+        <i class="ti ti-download" aria-hidden="true"></i>
+        Download ZIP
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FIRMWARE & MANUALS ── -->
+<section class="section section-bg">
+  <div class="sec-divider">
+    <div class="div-line"></div>
+    <span class="div-text">Firmware &amp; Manuals</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="section-header">
+    <h2>Firmware &amp; <em>Documentation</em></h2>
+    <p>Keep your hardware up to date and your team informed with the latest manuals and firmware releases.</p>
+  </div>
+
+  <div class="resource-grid">
+
+    <div class="placeholder-card">
+      <i class="ti ti-circuit-board" aria-hidden="true"></i>
+      <strong style="display:block;font-size:14px;color:var(--ink);margin-bottom:6px;">NEO Series Firmware</strong>
+      Firmware updates are registered directly to device serial numbers. Please contact our technical team to receive the latest validated firmware package for your NEO printer.
+    </div>
+
+    <div class="placeholder-card">
+      <i class="ti ti-circuit-board" aria-hidden="true"></i>
+      <strong style="display:block;font-size:14px;color:var(--ink);margin-bottom:6px;">Prima 8 Firmware</strong>
+      Please contact our technical support engineers to receive the certified firmware and secure setup package for PRIMA-802 systems.
+    </div>
+
+    <div class="placeholder-card">
+      <i class="ti ti-file-text" aria-hidden="true"></i>
+      <strong style="display:block;font-size:14px;color:var(--ink);margin-bottom:6px;">User Manuals</strong>
+      Operation, installation, and routine maintenance guides are provided with your hardware. Contact support to request digital PDF manual replacements.
+    </div>
+
+    <div class="placeholder-card">
+      <i class="ti ti-file-certificate" aria-hidden="true"></i>
+      <strong style="display:block;font-size:14px;color:var(--ink);margin-bottom:6px;">Compliance Documents</strong>
+      FIPS-201, CE, and FCC certification documents are available upon request. Contact our team to request regulatory compliance files for your audit.
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section section-white">
+  <div class="sec-divider">
+    <div class="div-line"></div>
+    <span class="div-text">Frequently Asked Questions</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="section-header">
+    <h2>Common <em>Questions</em></h2>
+    <p>Answers to what we hear most from customers setting up or managing their card issuance systems.</p>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        Which driver should I use for my Magicard 600 NEO?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>Download the <strong>Magicard NEO Driver v3.1.2</strong> ZIP above, or use the <strong>Magicard Windows Installer EXE</strong> for a guided setup. Both support the 600 NEO, 300 NEO, and E+ NEO. If you are on a managed IT environment, the EXE installer is recommended as it configures printer ports automatically.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        Do the drivers support Windows 10 and Windows 11?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>Yes. All drivers listed above are tested and certified for Windows 10 (64-bit) and Windows 11 (64-bit). macOS and Linux support is not currently available via Sourcezy — please <a href="mailto:sales@sourcezy.in">contact us</a> if you have a non-Windows requirement.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        When should I use the 600 DPI driver vs the 300 DPI driver for Prima 8?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>Use the <strong>600 DPI driver</strong> when your programme requires photo-quality output, FIPS-201 compliance, or biometric-grade card printing. The <strong>300 DPI driver</strong> is suitable for high-volume corporate ID programmes where standard resolution is sufficient. If in doubt, consult a Sourcezy engineer before switching.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        How do I order ribbons and consumables?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>Sourcezy supplies genuine Magicard ribbons (YMCKO and KO configurations) and PVC card stock directly. For single-unit orders, contact us at <a href="mailto:sales@sourcezy.in">sales@sourcezy.in</a>. For bulk consumable orders with scheduled delivery, use the <a href="bulk_inquiry.html">Bulk Inquiry</a> form and we will prepare a tailored quote.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        My printer is not being detected after driver installation. What should I do?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>First, ensure the USB cable is connected before launching the installer. After installation, restart your computer and check Device Manager for any warning flags on the printer entry. If the issue persists: (1) uninstall the driver, (2) restart, (3) reconnect the printer, and (4) re-run the EXE installer with administrator privileges. If unresolved, <a href="mailto:sales@sourcezy.in">open a support ticket</a> with your Windows version and printer model.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        Does Sourcezy provide on-site installation support in Bengaluru?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>Yes. Sourcezy provides on-site commissioning and driver setup for all systems purchased from us in Bengaluru and surrounding regions. For organisations across South India, we offer remote installation support via video call. On-site support is available for enterprise accounts — <a href="contact.html">contact us</a> to discuss.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        How often are firmware and driver updates released?
+        <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i>
+      </button>
+      <div class="faq-a">
+        <p>Magicard releases driver and firmware updates periodically — typically once or twice a year for stability and security patches. Sourcezy validates each release before distributing it to customers. If you have purchased a system from us, we will notify you when a relevant update is available. You can also write to <a href="mailto:sales@sourcezy.in">sales@sourcezy.in</a> to check your printer's current version status.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── OPEN TICKET ── -->
+<section class="section section-bg">
+  <div class="sec-divider">
+    <div class="div-line"></div>
+    <span class="div-text">Get In Touch</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="ticket-strip">
+    <div class="ticket-strip-text">
+      <h3>Can't find what you need?</h3>
+      <p>Our support team responds to all technical queries within one business day. Reach us by email or call directly for urgent issues.</p>
+    </div>
+    <div class="ticket-strip-actions">
+      <a href="mailto:sales@sourcezy.in?subject=Support%20Request" class="btn-primary">
+        <i class="ti ti-mail" aria-hidden="true"></i>
+        Open a Ticket
+      </a>
+      <a href="tel:+919886554160" class="btn-outline">
+        <i class="ti ti-phone" aria-hidden="true"></i>
+        Call Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ── -->
+<section class="cta-band">
+  <h2>Need a <em>system quote?</em></h2>
+  <p>Speak with a Sourcezy engineer about the right Magicard printer for your card volume and security requirements.</p>
+  <div class="cta-band-row">
+    <a href="contact.html" class="btn-white">Consult an Expert →</a>
+    <a href="bulk_inquiry.html" class="btn-outline-white">Bulk Inquiry</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="sourcezy.png" alt="Sourcezy">
+      <p>Magicard Solutions Reseller in India. Supplying card printers, ribbons, and issuance systems to banks, hospitals, schools, and corporates across South India.</p>
+      <div class="contact-links">
+        <a href="tel:+919886554160"><i class="ti ti-phone" aria-hidden="true"></i>+91 98865 54160</a>
+        <a href="tel:+919964301093"><i class="ti ti-phone" aria-hidden="true"></i>+91 99643 01093</a>
+        <a href="mailto:sales@sourcezy.in"><i class="ti ti-mail" aria-hidden="true"></i>sales@sourcezy.in</a>
+        <a href="#"><i class="ti ti-map-pin" aria-hidden="true"></i>Bengaluru, Karnataka, India</a>
+      </div>
+      <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left;">
+        <img src="images/google-review-qr.png" alt="Google Review QR Code" style="width: 50px; height: 50px; background: #fff; padding: 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
+        <div>
+          <span style="display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">Google Maps</span>
+          <a href="https://q.me-qr.com/6zvjel56" target="_blank" rel="noopener" style="font-size: 13px; color: #2B7BE5; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin: 0;">Write a review <i class="ti ti-external-link" aria-hidden="true" style="font-size: 11px;"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Solutions</h4>
+      <ul>
+        <li><a href="solutions.html">Hardware Catalogue</a></li>
+        <li><a href="system_showcase.html">NEO Series</a></li>
+        <li><a href="system_showcase.html#prima8">Prima 8</a></li>
+        <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="company.html">About Us</a></li>
+        <li><a href="company.html#partnership">Our Story</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+919886554160">+91 98865 54160</a></li>
+        <li><a href="tel:+919964301093">+91 99643 01093</a></li>
+        <li><a href="mailto:sales@sourcezy.in">sales@sourcezy.in</a></li>
+        <li><a href="contact.html">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sourcezy. All rights reserved.</p>
+    <span class="footer-partner-badge">Magicard Solutions Reseller · India</span>
+  </div>
+</footer>
+
+<script>
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+
+    // Close all open items
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+
+    // Open clicked item if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // Redirect mailto links directly to Gmail
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link && link.href && link.href.startsWith('mailto:')) {
+      e.preventDefault();
+      const mailtoHref = link.href.substring(7);
+      const parts = mailtoHref.split('?');
+      const to = decodeURIComponent(parts[0]);
+      let subject = '';
+      let body = '';
+      if (parts[1]) {
+        const params = new URLSearchParams(parts[1]);
+        subject = params.get('subject') || '';
+        body = params.get('body') || '';
+      }
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank');
+    }
+  });
+</script>
+
+</body>
+</html>

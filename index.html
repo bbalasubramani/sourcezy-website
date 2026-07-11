@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourcezy | Secure ID Card Issuance — Magicard Solutions Reseller</title>
+<meta name="description" content="Sourcezy delivers end-to-end card issuance infrastructure — Magicard hardware, consumables, and expert support — for banks, institutions, and government offices across South India.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F0F4FA;
+    --white: #ffffff;
+    --navy: #0A2A6E;
+    --blue: #2B7BE5;
+    --ink: #0A1628;
+    --muted: #5A6A82;
+    --hint: #8A9BB5;
+    --border: #D8E2F0;
+    --surface: #E8EEF8;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240, 244, 250, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo { height: 34px; object-fit: contain; display: block; }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    font-size: 12px;
+    background: var(--navy);
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+
+  .nav-cta:hover { background: #0D3A9A; }
+
+  .nav-mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  /* ── HERO ── */
+  .hero-wrap {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  #dotgrid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 88px 48px 72px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(43, 123, 229, 0.4);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(43, 123, 229, 0.06);
+  }
+
+  .hero-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 60px;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: #0D3A9A; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    padding: 14px 30px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+  .trust-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .trust-label {
+    font-size: 11px;
+    color: var(--hint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .trust-sep {
+    width: 3px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 50%;
+  }
+
+  .trust-item {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--hint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTACT BAR ── */
+  .contact-bar {
+    background: var(--navy);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+  }
+
+  .contact-item i { font-size: 15px; color: rgba(255,255,255,0.4); }
+  .contact-item span { color: rgba(255,255,255,0.85); }
+  .contact-item:hover span { color: #fff; }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    display: flex;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-cell {
+    flex: 1;
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--font-serif);
+    font-size: 38px;
+    color: var(--blue);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--hint);
+    margin-top: 5px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .sec-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 48px 48px 20px;
+  }
+
+  .div-line { flex: 1; height: 1px; background: var(--border); }
+
+  .div-text {
+    font-size: 11px;
+    color: var(--hint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  /* ── BENTO GRID ── */
+  .bento {
+    padding: 0 48px 64px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: rgba(43,123,229,0.35);
+    transform: translateY(-2px);
+  }
+
+  .card-wide { grid-column: span 2; }
+  .card-dark { background: var(--navy); border-color: var(--navy); }
+  .card-blue { background: var(--blue); border-color: var(--blue); }
+  .card-dark:hover, .card-blue:hover { transform: translateY(-2px); }
+
+  .ctag {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--hint);
+    margin-bottom: 16px;
+  }
+
+  .ctag-lt {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+  }
+
+  .ctitle {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .ctitle-lt {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .cbody {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .cbody-lt {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .big-num {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    color: var(--blue);
+    line-height: 1;
+  }
+
+  .icon-lg { font-size: 28px; color: var(--blue); margin-bottom: 16px; display: block; }
+  .icon-lg-lt { font-size: 28px; color: rgba(255,255,255,0.9); margin-bottom: 16px; display: block; }
+
+  .product-row { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+
+  .pchip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+
+  .pchip:hover { border-color: var(--blue); background: rgba(43,123,229,0.04); }
+
+  .pname { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .pdesc { font-size: 11px; color: var(--hint); margin-top: 2px; }
+  .parrow { font-size: 14px; color: var(--blue); flex-shrink: 0; }
+
+  /* ── INDUSTRIES ── */
+  .industries {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px;
+  }
+
+  .industries-head {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .industries-head h2 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .industries-head p {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .industry-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .industry-card {
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 24px 16px;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .industry-card:hover {
+    border-color: var(--blue);
+    background: rgba(43,123,229,0.04);
+  }
+
+  .industry-card i {
+    font-size: 26px;
+    color: var(--blue);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .industry-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .industry-desc {
+    font-size: 11px;
+    color: var(--hint);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--navy);
+    padding: 64px 48px;
+    text-align: center;
+  }
+
+  .cta-band h2 {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .cta-band p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 32px;
+    font-weight: 300;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-band-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .btn-white {
+    background: #fff;
+    color: var(--navy);
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+
+  .btn-white:hover { background: #e8eef8; }
+
+  .btn-outline-white {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s;
+  }
+
+  .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    padding: 48px 48px 28px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-logo { height: 30px; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 14px; display: block; }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .footer-contact a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+
+  .footer-contact a:hover { color: rgba(255,255,255,0.85); }
+  .footer-contact i { font-size: 14px; }
+
+  .footer-col h4 {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: #fff; }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-badge {
+    font-size: 11px;
+    background: rgba(43,123,229,0.15);
+    color: rgba(43,123,229,0.8);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(43,123,229,0.2);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav { padding: 0 20px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-mobile-toggle { display: block; }
+
+    .hero-inner { padding: 60px 20px 48px; }
+    .hero-title { font-size: 36px; }
+    .hero-sub { font-size: 14px; }
+    .cta-row { flex-direction: column; align-items: center; }
+    .trust-row { gap: 12px; }
+
+    .contact-bar { padding: 14px 20px; gap: 16px; flex-direction: column; align-items: flex-start; }
+
+    .stats-strip { flex-wrap: wrap; }
+    .stat-cell { min-width: 50%; border-bottom: 1px solid var(--border); }
+
+    .sec-divider { padding: 36px 20px 16px; }
+
+    .bento {
+      padding: 0 20px 40px;
+      grid-template-columns: 1fr;
+    }
+    .card-wide { grid-column: span 1; }
+
+    .industry-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .industries { padding: 36px 20px; }
+    .cta-band { padding: 48px 20px; }
+    .cta-band-row { flex-direction: column; align-items: center; }
+
+    .footer { padding: 36px 20px 20px; }
+    .footer-top { grid-template-columns: 1fr; gap: 24px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(240,244,250,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav .nav-cta-m {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--navy);
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html">
+      <img src="sourcezy.png" class="nav-logo" alt="Sourcezy — ID Print & Tech">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="system_showcase.html">Hardware</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="company.html">Company</a></li>
+      <li><a href="bulk_inquiry.html">Bulk Inquiry</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Consult Expert →</a>
+    <button class="nav-mobile-toggle" aria-label="Open menu" onclick="toggleMobileNav()">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="active">Home</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="system_showcase.html">Hardware</a>
+    <a href="support.html">Support</a>
+    <a href="company.html">Company</a>
+    <a href="bulk_inquiry.html">Bulk Inquiry</a>
+    <a href="contact.html" class="nav-cta-m">Consult Expert →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-wrap" aria-label="Hero">
+  <canvas id="dotgrid" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span class="hero-dot"></span>
+      Magicard Solutions Reseller · India
+    </div>
+    <h1 class="hero-title">
+      Precision identity systems<br>for <em>modern</em> enterprises
+    </h1>
+    <p class="hero-sub">
+      End-to-end card issuance infrastructure — hardware, consumables, and expert support — trusted by banks, institutions, and government offices across South India.
+    </p>
+    <div class="cta-row">
+      <a href="solutions.html" class="btn-primary">Explore Solutions →</a>
+      <a href="contact.html" class="btn-outline">Talk to an Expert</a>
+    </div>
+    <div class="trust-row">
+      <span class="trust-label">Serving</span>
+      <span class="trust-sep"></span>
+      <span class="trust-item">Banking</span>
+      <span class="trust-sep"></span>
+      <span class="trust-item">Healthcare</span>
+      <span class="trust-sep"></span>
+      <span class="trust-item">Education</span>
+      <span class="trust-sep"></span>
+      <span class="trust-item">Government</span>
+      <span class="trust-sep"></span>
+      <span class="trust-item">Corporate</span>
+    </div>
+  </div>
+
+  <!-- CONTACT BAR -->
+  <div class="contact-bar">
+    <a href="tel:+919886554160" class="contact-item">
+      <i class="ti ti-phone" aria-hidden="true"></i>
+      <span>+91 98865 54160</span>
+    </a>
+    <a href="tel:+919964301093" class="contact-item">
+      <i class="ti ti-device-mobile" aria-hidden="true"></i>
+      <span>+91 99643 01093</span>
+    </a>
+    <a href="mailto:sales@sourcezy.in" class="contact-item">
+      <i class="ti ti-mail" aria-hidden="true"></i>
+      <span>sales@sourcezy.in</span>
+    </a>
+    <div class="contact-item">
+      <i class="ti ti-map-pin" aria-hidden="true"></i>
+      <span>Bengaluru · South India delivery</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip" role="region" aria-label="Key statistics">
+  <div class="stat-cell">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Systems deployed</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Magicard product lines</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">24h</div>
+    <div class="stat-label">Support response SLA</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">South India</div>
+    <div class="stat-label">Coverage</div>
+  </div>
+</div>
+
+<!-- WHY SOURCEZY BENTO -->
+<section aria-labelledby="why-heading">
+  <div class="sec-divider">
+    <div class="div-line"></div>
+    <span class="div-text" id="why-heading">Why Sourcezy</span>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="bento">
+    <!-- Products wide card -->
+    <div class="card card-wide">
+      <div class="ctag">Our hardware lineup</div>
+      <div class="ctitle" style="margin-bottom:18px">Magicard printer series</div>
+      <div class="product-row">
+        <a href="system_showcase.html#magicard600" class="pchip">
+          <div>
+            <div class="pname">Magicard 600 NEO</div>
+            <div class="pdesc">Professional · digital shredding · high-speed printing</div>
+          </div>
+          <i class="ti ti-arrow-right parrow" aria-hidden="true"></i>
+        </a>
+        <a href="system_showcase.html#magicard300" class="pchip">
+          <div>
+            <div class="pname">Magicard 300 NEO</div>
+            <div class="pdesc">Corporate · reliable secure direct-to-card printing</div>
+          </div>
+          <i class="ti ti-arrow-right parrow" aria-hidden="true"></i>
+        </a>
+        <a href="system_showcase.html#prima8" class="pchip">
+          <div>
+            <div class="pname">Prima 8</div>
+            <div class="pdesc">High definition · photo quality · high-volume delivery</div>
+          </div>
+          <i class="ti ti-arrow-right parrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Authorised partner -->
+    <div class="card card-dark">
+      <div class="ctag-lt">Solutions Reseller</div>
+      <i class="ti ti-rosette-discount-check icon-lg-lt" aria-hidden="true"></i>
+      <div class="ctitle-lt">Magicard Solutions Reseller in India</div>
+      <p class="cbody-lt" style="margin-top:10px">100% genuine hardware, factory warranty protection, and direct manufacturer engineering support.</p>
+    </div>
+
+    <!-- 24h stat -->
+    <div class="card">
+      <div class="ctag">Response time</div>
+      <div class="big-num">24h</div>
+      <div style="font-size:12px;color:var(--hint);margin-top:10px;font-weight:300;line-height:1.5">Guaranteed support SLA for every client, every time.</div>
+    </div>
+
+    <!-- Bulk inquiry -->
+    <div class="card card-blue">
+      <div class="ctag-lt">Bulk ready</div>
+      <i class="ti ti-package icon-lg-lt" aria-hidden="true"></i>
+      <div class="ctitle-lt">Enterprise & bulk inquiry</div>
+      <p class="cbody-lt" style="margin-top:10px">Custom pricing for high-volume deployments. Talk to us before you buy.</p>
+    </div>
+
+    <!-- Coverage -->
+    <div class="card">
+      <div class="ctag">Coverage</div>
+      <i class="ti ti-map-2 icon-lg" aria-hidden="true"></i>
+      <div class="ctitle">Deployed across South India</div>
+      <p class="cbody" style="margin-top:10px">On-site support, remote assistance, and consumables supply — across South India.</p>
+    </div>
+
+    <!-- End to end -->
+    <div class="card">
+      <div class="ctag">End-to-end</div>
+      <i class="ti ti-layers-intersect icon-lg" aria-hidden="true"></i>
+      <div class="ctitle">Full issuance system</div>
+      <p class="cbody" style="margin-top:10px">Hardware + ribbons + software + support. Not just a printer — a complete solution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries" aria-labelledby="industries-heading">
+  <div class="industries-head">
+    <h2 id="industries-heading">Sectors we serve</h2>
+    <p>From high-security banking environments to school campuses — we deploy the right system for every use case.</p>
+  </div>
+  <div class="industry-grid">
+    <div class="industry-card">
+      <i class="ti ti-building-bank" aria-hidden="true"></i>
+      <div class="industry-name">Banking & Finance</div>
+      <div class="industry-desc">Staff ID, visitor & access cards</div>
+    </div>
+    <div class="industry-card">
+      <i class="ti ti-building-hospital" aria-hidden="true"></i>
+      <div class="industry-name">Healthcare</div>
+      <div class="industry-desc">Patient ID & staff credentials</div>
+    </div>
+    <div class="industry-card">
+      <i class="ti ti-school" aria-hidden="true"></i>
+      <div class="industry-name">Education</div>
+      <div class="industry-desc">Student & faculty ID cards</div>
+    </div>
+    <div class="industry-card">
+      <i class="ti ti-building-community" aria-hidden="true"></i>
+      <div class="industry-name">Government</div>
+      <div class="industry-desc">Secure credential issuance</div>
+    </div>
+    <div class="industry-card">
+      <i class="ti ti-building" aria-hidden="true"></i>
+      <div class="industry-name">Corporate</div>
+      <div class="industry-desc">Employee & access card systems</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" aria-label="Contact call to action">
+  <h2>Ready to deploy a card issuance system?</h2>
+  <p>Talk to our experts for a customised recommendation — no obligation, just the right solution for your organisation.</p>
+  <div class="cta-band-row">
+    <a href="contact.html" class="btn-white">Get a Free Consultation →</a>
+    <a href="bulk_inquiry.html" class="btn-outline-white">Bulk Inquiry</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <img src="sourcezy.png" class="footer-logo" alt="Sourcezy">
+      <p class="footer-tagline">Magicard Solutions Reseller delivering end-to-end secure card issuance infrastructure across South India.</p>
+      <div class="footer-contact">
+        <a href="tel:+919886554160"><i class="ti ti-phone" aria-hidden="true"></i> +91 98865 54160</a>
+        <a href="tel:+919964301093"><i class="ti ti-device-mobile" aria-hidden="true"></i> +91 99643 01093</a>
+        <a href="mailto:sales@sourcezy.in"><i class="ti ti-mail" aria-hidden="true"></i> sales@sourcezy.in</a>
+      </div>
+      <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left;">
+        <img src="images/google-review-qr.png" alt="Google Review QR Code" style="width: 50px; height: 50px; background: #fff; padding: 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
+        <div>
+          <span style="display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">Google Maps</span>
+          <a href="https://q.me-qr.com/6zvjel56" target="_blank" rel="noopener" style="font-size: 13px; color: #2B7BE5; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin: 0;">Write a review <i class="ti ti-external-link" aria-hidden="true" style="font-size: 11px;"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Solutions</h4>
+      <a href="solutions.html">Card Printers</a>
+      <a href="system_showcase.html">Hardware</a>
+      <a href="bulk_inquiry.html">Bulk Inquiry</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="company.html">About Us</a>
+      <a href="support.html">Support</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:sales@sourcezy.in">sales@sourcezy.in</a>
+      <a href="tel:+919886554160">+91 98865 54160</a>
+      <a href="#">Bengaluru, Karnataka</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Sourcezy. All rights reserved.</span>
+    <span class="footer-badge">Magicard Solutions Reseller · India</span>
+  </div>
+</footer>
+
+<!-- DOT GRID ANIMATION -->
+<script>
+(function() {
+  const canvas = document.getElementById('dotgrid');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const SPACING = 30;
+  const DOT_R = 1.3;
+  const INFLUENCE = 120;
+  const MAX_SHIFT = 20;
+  let mouse = { x: -9999, y: -9999 };
+  let dots = [];
+  let animId;
+
+  function resize() {
+    const wrap = canvas.parentElement;
+    canvas.width = wrap.offsetWidth;
+    canvas.height = wrap.offsetHeight;
+    buildDots();
+  }
+
+  function buildDots() {
+    dots = [];
+    const cols = Math.ceil(canvas.width / SPACING) + 2;
+    const rows = Math.ceil(canvas.height / SPACING) + 2;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        dots.push({ ox: c * SPACING, oy: r * SPACING, x: c * SPACING, y: r * SPACING });
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let d of dots) {
+      const dx = mouse.x - d.ox;
+      const dy = mouse.y - d.oy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < INFLUENCE && dist > 0) {
+        const force = (1 - dist / INFLUENCE) * MAX_SHIFT;
+        d.x += (d.ox - (dx / dist) * force - d.x) * 0.1;
+        d.y += (d.oy - (dy / dist) * force - d.y) * 0.1;
+      } else {
+        d.x += (d.ox - d.x) * 0.07;
+        d.y += (d.oy - d.y) * 0.07;
+      }
+      const proximity = dist < INFLUENCE ? (1 - dist / INFLUENCE) : 0;
+      const alpha = 0.1 + proximity * 0.4;
+      const r = DOT_R + proximity * 1.5;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(43,123,229,${alpha.toFixed(2)})`;
+      ctx.fill();
+    }
+    animId = requestAnimationFrame(draw);
+  }
+
+  const wrap = canvas.parentElement;
+  wrap.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  wrap.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!mq.matches) {
+    resize();
+    draw();
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+})();
+</script>
+<script>
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  // Redirect mailto links directly to Gmail
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link && link.href && link.href.startsWith('mailto:')) {
+      e.preventDefault();
+      const mailtoHref = link.href.substring(7);
+      const parts = mailtoHref.split('?');
+      const to = decodeURIComponent(parts[0]);
+      let subject = '';
+      let body = '';
+      if (parts[1]) {
+        const params = new URLSearchParams(parts[1]);
+        subject = params.get('subject') || '';
+        body = params.get('body') || '';
+      }
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank');
+    }
+  });
+</script>
+</body>
+</html>
