@@ -99,7 +99,50 @@ export default async function handler(req, res) {
 
     const insertedData = await supabaseResponse.json();
 
-    // 3. Optional: Notification Webhook
+    // 3. Resend Email Notification
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (resendApiKey) {
+      try {
+        const htmlContent = `
+          <h2>New Bulk Inquiry</h2>
+          <p><strong>Organisation Name:</strong> ${payload.org_name}</p>
+          <p><strong>Organisation Type:</strong> ${payload.org_type}</p>
+          <p><strong>Estimated Quantity:</strong> ${payload.quantity}</p>
+          <p><strong>Printer Model of Interest:</strong> ${payload.printer_model}</p>
+          <p><strong>Deployment Timeline:</strong> ${payload.timeline}</p>
+          <hr />
+          <p><strong>Contact Person:</strong> ${payload.contact_name}</p>
+          <p><strong>Phone:</strong> ${payload.contact_phone}</p>
+          <p><strong>Email:</strong> <a href="mailto:${payload.contact_email}">${payload.contact_email}</a></p>
+          <hr />
+          <p><strong>Additional Requirements:</strong></p>
+          <p style="white-space: pre-wrap; background: #f5f5f5; padding: 12px; border-radius: 4px;">${payload.message || '—'}</p>
+        `;
+
+        const emailResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${resendApiKey}`
+          },
+          body: JSON.stringify({
+            from: 'Sourcezy Web Forms <onboarding@resend.dev>',
+            to: ['sales@sourcezy.in'],
+            subject: `New Bulk Inquiry — ${payload.org_name} (${payload.quantity})`,
+            html: htmlContent
+          })
+        });
+
+        if (!emailResponse.ok) {
+          const resendError = await emailResponse.text();
+          console.error('Resend error:', resendError);
+        }
+      } catch (err) {
+        console.error('Failed to send email via Resend:', err);
+      }
+    }
+
+    // 4. Optional: Notification Webhook
     const webhookUrl = process.env.NOTIFICATION_WEBHOOK_URL;
     if (webhookUrl) {
       try {
@@ -120,7 +163,6 @@ export default async function handler(req, res) {
         });
       } catch (err) {
         console.error('Failed to send notification webhook:', err);
-        // Do not fail the whole request
       }
     }
 

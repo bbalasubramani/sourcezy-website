@@ -73,7 +73,44 @@ export default async function handler(req, res) {
 
     const insertedData = await supabaseResponse.json();
 
-    // 3. Optional: Notification Webhook
+    // 3. Resend Email Notification
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (resendApiKey) {
+      try {
+        const htmlContent = `
+          <h2>New Contact Inquiry</h2>
+          <p><strong>Name:</strong> ${payload.name}</p>
+          <p><strong>Organisation:</strong> ${payload.organisation || 'N/A'}</p>
+          <p><strong>Email:</strong> <a href="mailto:${payload.email}">${payload.email}</a></p>
+          <p><strong>Phone:</strong> ${payload.phone || 'N/A'}</p>
+          <p><strong>Message:</strong></p>
+          <p style="white-space: pre-wrap; background: #f5f5f5; padding: 12px; border-radius: 4px;">${payload.message}</p>
+        `;
+
+        const emailResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${resendApiKey}`
+          },
+          body: JSON.stringify({
+            from: 'Sourcezy Web Forms <onboarding@resend.dev>',
+            to: ['sales@sourcezy.in'],
+            subject: `New Contact Form Inquiry — ${payload.name}`,
+            html: htmlContent
+          })
+        });
+
+        if (!emailResponse.ok) {
+          const resendError = await emailResponse.text();
+          console.error('Resend error:', resendError);
+        }
+      } catch (err) {
+        console.error('Failed to send email via Resend:', err);
+      }
+    }
+
+    // 4. Optional: Notification Webhook
     const webhookUrl = process.env.NOTIFICATION_WEBHOOK_URL;
     if (webhookUrl) {
       try {
@@ -91,7 +128,6 @@ export default async function handler(req, res) {
         });
       } catch (err) {
         console.error('Failed to send notification webhook:', err);
-        // Do not fail the whole request if webhook fails
       }
     }
 
