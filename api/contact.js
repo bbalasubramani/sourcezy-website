@@ -57,7 +57,18 @@ export default async function handler(req, res) {
     if (!supabaseResponse.ok) {
       const errorText = await supabaseResponse.text();
       console.error('Supabase error:', errorText);
-      throw new Error(`Supabase returned status ${supabaseResponse.status}`);
+      try {
+        const errorJson = JSON.parse(errorText);
+        return res.status(supabaseResponse.status).json({
+          success: false,
+          error: errorJson.message || errorJson.hint || `Database returned status ${supabaseResponse.status}`
+        });
+      } catch {
+        return res.status(supabaseResponse.status).json({
+          success: false,
+          error: `Database error: ${errorText}`
+        });
+      }
     }
 
     const insertedData = await supabaseResponse.json();
