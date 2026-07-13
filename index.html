@@ -324,7 +324,7 @@
   .bento {
     padding: 0 48px 64px;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 12px;
   }
 
@@ -341,9 +341,10 @@
     transform: translateY(-2px);
   }
 
-  .card-wide { grid-column: span 2; }
-  .card-dark { background: var(--navy); border-color: var(--navy); }
+  .card-wide { grid-column: span 8; }
+  .card-dark { grid-column: span 4; background: var(--navy); border-color: var(--navy); }
   .card-blue { background: var(--blue); border-color: var(--blue); }
+  .card-small { grid-column: span 3; }
   .card-dark:hover, .card-blue:hover { transform: translateY(-2px); }
 
   .ctag {
@@ -661,7 +662,7 @@
       padding: 0 20px 40px;
       grid-template-columns: 1fr;
     }
-    .card-wide { grid-column: span 1; }
+    .card-wide, .card-dark, .card-small { grid-column: span 1; }
 
     .industry-grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -866,14 +867,14 @@
     </div>
 
     <!-- 24h stat -->
-    <div class="card">
+    <div class="card card-small">
       <div class="ctag">Response time</div>
       <div class="big-num">24h</div>
       <div style="font-size:12px;color:var(--hint);margin-top:10px;font-weight:300;line-height:1.5">Guaranteed support SLA for every client, every time.</div>
     </div>
 
     <!-- Bulk inquiry -->
-    <div class="card card-blue">
+    <div class="card card-blue card-small">
       <div class="ctag-lt">Bulk ready</div>
       <i class="ti ti-package icon-lg-lt" aria-hidden="true"></i>
       <div class="ctitle-lt">Enterprise & bulk inquiry</div>
@@ -881,7 +882,7 @@
     </div>
 
     <!-- Coverage -->
-    <div class="card">
+    <div class="card card-small">
       <div class="ctag">Coverage</div>
       <i class="ti ti-map-2 icon-lg" aria-hidden="true"></i>
       <div class="ctitle">Deployed across South India</div>
@@ -889,7 +890,7 @@
     </div>
 
     <!-- End to end -->
-    <div class="card">
+    <div class="card card-small">
       <div class="ctag">End-to-end</div>
       <i class="ti ti-layers-intersect icon-lg" aria-hidden="true"></i>
       <div class="ctitle">Full issuance system</div>
